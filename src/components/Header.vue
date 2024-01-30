@@ -43,7 +43,7 @@
   right: 10px;
 }
 .h3-r {
- left: 42px;
+ padding-left: 84px;
  bottom: 79px;
 }
 header {
@@ -57,3 +57,6 @@ header {
   height: 3vw;
 }
 </style>
+<script setup>
+
+</script>
