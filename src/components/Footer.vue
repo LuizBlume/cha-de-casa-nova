@@ -16,7 +16,7 @@
 </template>
 <style scoped>
 .footer {
-    margin-top: 445px;
+  margin-top: 445px;
   background-color: #bf6f4e;
   width: 100vw;
   height: 7vw;
@@ -25,7 +25,7 @@
   align-items: center;
 }
 .h3-footer {
-  color: #7d7463;
+  color: #2c2c2c;
   font-family: "Kaushan Script";
   font-style: normal;
   font-size: 30px;
