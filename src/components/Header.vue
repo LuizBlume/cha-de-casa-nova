@@ -12,7 +12,7 @@
 </template>
 <style scoped>
 .h1-header {
-  color: #7d7463;
+  color: #2c2c2c;
   font-family: "Kaushan Script";
   font-style: normal;
   font-size: 50px;
@@ -23,7 +23,7 @@
   align-items: flex-start;
 }
 .h3-v, .h3-i, .h3-r {
-  color: #7d7463;
+  color: #2c2c2c;
   font-family: "Kaushan Script";
   font-style: normal;
   font-size: 30px;
