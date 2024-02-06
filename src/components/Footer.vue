@@ -16,9 +16,9 @@
 </template>
 <style scoped>
 .footer {
-  margin-top: 445px;
+  margin-top: 20px;
   background-color: #bf6f4e;
-  width: 100vw;
+  width: 100%;
   height: 7vw;
   display: flex;
   justify-content: center;
