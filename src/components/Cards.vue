@@ -213,7 +213,7 @@
 <style scoped>
 .row {
   padding: 10px 20px 10px 20px;
-  background-color: #D5B6A2;
+  background-color: #ffffff;
 }
 .g-4, .gx-4 {
   --bs-gutter-x: 0;
