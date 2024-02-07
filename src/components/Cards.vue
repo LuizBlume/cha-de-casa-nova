@@ -237,7 +237,7 @@
 }
 .card {
   margin: 10px;
-  background-color: #d1ac94;
+  background-color: #ffffff;
 }
 .card-body {
   display: flex !important;
