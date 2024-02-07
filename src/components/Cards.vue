@@ -213,7 +213,7 @@
 <style scoped>
 .row {
   padding: 10px 20px 10px 20px;
-  background-color: #ffffff;
+  background-color: #D5B6A2;
 }
 .g-4, .gx-4 {
   --bs-gutter-x: 0;
@@ -237,7 +237,7 @@
 }
 .card {
   margin: 10px;
-  background-color: #ffffff;
+  background-color: #d1ac94;
 }
 .card-body {
   display: flex !important;
