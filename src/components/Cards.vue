@@ -11,7 +11,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -91,7 +91,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -107,7 +107,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -123,7 +123,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -139,7 +139,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -155,7 +155,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -171,7 +171,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -187,7 +187,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -203,7 +203,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/comprar" class="escolher">Escolher</router-link>
+            <router-link to="/Escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -213,6 +213,7 @@
 <style scoped>
 .row {
   padding: 10px 20px 10px 20px;
+  background-color: #D5B6A2;
 }
 .g-4, .gx-4 {
   --bs-gutter-x: 0;
@@ -236,6 +237,7 @@
 }
 .card {
   margin: 10px;
+  background-color: #d1ac94;
 }
 .card-body {
   display: flex !important;
@@ -243,11 +245,28 @@
   justify-content: center !important;
   align-items: flex-start !important;
 }
+@media (width: 320px) {
+  .card-img-top {
+    min-height: 100vw;
+    max-height: 100vw;
+  }
+}
 @media (min-width: 1025px) and (max-width: 1440px) {
   .card-img-top {
     min-height: 30vw;
     max-height: 30vw;
   }
-  
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .card-img-top {
+    min-height: 30vw;
+    max-height: 30vw;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .card-img-top {
+    min-height: 30vw;
+    max-height: 30vw;
+  }
 }
 </style>

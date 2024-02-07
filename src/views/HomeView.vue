@@ -5,7 +5,7 @@ import Footer from '../components/Footer.vue'
 </script>
 
 <template>
-  <div>
+  <div class="background">
     <Header />
     <Cards />
     <Footer />
