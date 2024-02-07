@@ -7,10 +7,41 @@
       <h3 class="h3-i">&</h3>
       <h3 class="h3-r">Raissa</h3>
     </header>
-    <div class="subheader"></div>
+    <div class="subheader">
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Registrar ou Conectar
+  </button>
+  <ul class="dropdown-menu">
+    <li><router-link to="/Cadastro" class="dropdown-item">Registrar-se</router-link></li>
+    <li><router-link to="/Login" class="dropdown-item">Conectar-se</router-link></li>
+  </ul>
+</div>
+    </div>
   </div>
 </template>
 <style scoped>
+.btn {
+  background: linear-gradient(#ad5631, #bf6f4e);
+  border: none;
+  margin-right: 10px;
+}
+.dropdown-menu.show {
+  background-color: #c58f78;
+}
+.dropdown-item:hover {
+  background-color: #c59682;
+}
+.dropdown-item {
+  color: #fdfdfd;
+  font-style: normal;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
 .h1-header {
   color: #2c2c2c;
   font-family: "Kaushan Script";
@@ -35,32 +66,35 @@
   position: relative;
 }
 .h3-v {
-  right: 60px;
+  right: 70px;
   bottom: 14px;
 }
 .h3-i {
-  bottom: 44px;
-  right: 10px;
+  bottom: 50px;
+  right: 5px;
 }
 .h3-r {
- padding-left: 84px;
- bottom: 79px;
+ padding-left: 124px;
+ bottom: 89px;
 }
 header {
   background-color: #bf6f4e;
   width: 100%;
-  height: 7vw;
+  height: 6vw;
 }
 .subheader {
   background: linear-gradient(#bf6f4e, #d5b6a2);
   width: 100%;
   height: 3vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .g-4, .gx-4 {
   --bs-gutter-x: 0;
   --bs-gutter-y: 0;
 }
-@media (min-width: 320px) {
+@media (max-width: 320px) {
     .h1-header {
       font-size: 300px;
     }
@@ -71,7 +105,16 @@ header {
       height: 18vw;
     }
     .subheader {
-      height: 6vw;
+      height: 8vw !important;
+    }
+    .dropdown, .btn {
+      top: 15px;
+      width: 173px;
+      font-size: 14px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
  @media (max-width: 375px) {
@@ -87,6 +130,21 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown, .btn {
+      top: 15px;
+      width: 173px;
+      font-size: 14px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 170px;
+    }
+    .dropdown-item {
+      font-size: 16px;
+    }
   }
    @media (min-width: 376px) and (max-width: 425px) {
     .h1-header {
@@ -100,6 +158,21 @@ header {
     }
     .subheader {
       height: 6vw;
+    }
+    .dropdown, .btn {
+      top: 12px;
+      width: 173px;
+      font-size: 14px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 170px;
+    }
+    .dropdown-item {
+      font-size: 16px;
     }
   }
   @media (min-width: 426px) and (max-width: 539px) {
@@ -115,6 +188,21 @@ header {
     .subheader {
       height: 8vw;
     }
+    .dropdown, .btn {
+      top: 15px;
+      width: 173px;
+      font-size: 14px;
+      height: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 170px;
+    }
+    .dropdown-item {
+      font-size: 16px;
+    }
   }
   @media (min-width: 540px) and (max-width: 768px) {
     .h1-header {
@@ -128,6 +216,12 @@ header {
     }
     .subheader {
       height: 7vw;
+    }
+    .dropdown-menu.show {
+      width: 193px;
+    }
+    .dropdown-item {
+      font-size: 20px;
     }
   }
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -143,6 +237,12 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown-menu.show {
+      width: 192px;
+    }
+    .dropdown-item {
+      font-size: 20px;
+    }
   }
   @media (min-width: 1025px) and (max-width: 1240px) {
     .h1-header {
@@ -157,6 +257,20 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown, .btn {
+      width: 200px;
+      font-size: 18px;
+      height: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 200px;
+    }
+    .dropdown-item {
+      font-size: 22px;
+    }
   }
   @media (min-width: 1241px) and (max-width: 1440px) {
     .h1-header {
@@ -166,10 +280,24 @@ header {
       font-size: 45px;
     }
     header {
-      height: 12vw;
+      height: 11vw;
     }
     .subheader {
-      height: 6vw;
+      height: 5vw;
+    }
+    .dropdown, .btn {
+      width: 250px;
+      font-size: 20px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 240px;
+    }
+    .dropdown-item {
+      font-size: 24px;
     }
   }
   @media (min-width: 1441px) and (max-width: 1620px) {
@@ -185,6 +313,20 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown, .btn {
+      width: 300px;
+      font-size: 22px;
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 290px;
+    }
+    .dropdown-item {
+      font-size: 30px;
+    }
   }
   @media (min-width: 1621px) and (max-width: 1920px) {
     .h1-header {
@@ -198,6 +340,20 @@ header {
     }
     .subheader {
       height: 6vw;
+    }
+    .dropdown, .btn {
+      width: 350px;
+      font-size: 24px;
+      height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 340px;
+    }
+    .dropdown-item {
+      font-size: 32px;
     }
   }
   @media (min-width: 1921px) and (max-width: 2200px) {
@@ -213,6 +369,20 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown, .btn {
+      width: 450px;
+      font-size: 26px;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 440px;
+    }
+    .dropdown-item {
+      font-size: 40px;
+    }
   }
   @media (min-width: 2201px) and (max-width: 2560px) {
     .h1-header {
@@ -227,8 +397,21 @@ header {
     .subheader {
       height: 6vw;
     }
+    .dropdown, .btn {
+      width: 450px;
+      font-size: 28px;
+      height: 65px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu.show {
+      width: 440px;
+    }
+    .dropdown-item {
+      font-size: 40px;
+    }
   }
 </style>
 <script setup>
-
 </script>
