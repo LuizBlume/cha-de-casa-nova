@@ -12,15 +12,15 @@
       <h3 class="h3-i">&</h3>
       <h3 class="h3-r">Raissa</h3>
       <div class="inferior">
-        <h4>Já tem uma conta?</h4>
-        <p>Faça o login aqui!</p>
-        <router-link to="/Login" class="router">
-          <button class="btn btn-secondary btn-reg">Login</button>
+        <h4>Não tem uma conta?</h4>
+        <p>Crie uma aqui!</p>
+        <router-link to="/Cadastro" class="router">
+          <button class="btn btn-secondary btn-reg">Cadastrar-se</button>
         </router-link>
       </div>
     </div>
     <div class="col-8">
-      <h1 class="h1-header">Cadastro</h1>
+      <h1 class="h1-header">Login</h1>
       <div class="box">
         <div class="inputBox">
           <input type="text" name="nome" id="nome" class="inputUser" required />
@@ -40,8 +40,8 @@
         </div>
       </div>
       <div class="botao-reg">
-        <router-link to="/Login" class="router">
-          <button class="btn btn-secondary btn-reg">Cadastrar-se</button>
+        <router-link to="/" class="router">
+          <button class="btn btn-secondary btn-reg">Conectar-se</button>
         </router-link>
       </div>
     </div>
