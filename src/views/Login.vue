@@ -184,4 +184,39 @@ p {
   background-color: #a88b77;
   color: #2c2c2c;
 }
+@media (max-width: 320px) {
+  .h1-header {
+    font-size: 40px;
+  }
+  .h3-v,
+  .h3-i,
+  .h3-r {
+    font-size: 35px;
+  }
+  h4,
+  p {
+    font-size: 35px;
+  }
+  .btn {
+    font-size: 25px;
+    width: 150px;
+    height: 40px;
+  }
+  .inputUser {
+    font-size: 20px;
+  }
+  .labelInput {
+    font-size: 15px;
+  }
+  .box,
+  .box2 {
+    top: 40px;
+  }
+  .box2 {
+    top: 150px;
+  }
+  .botao-reg {
+    top: 200px;
+  }
+}
 </style>
