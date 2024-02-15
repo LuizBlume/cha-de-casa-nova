@@ -13,8 +13,8 @@
     Registrar ou Conectar
   </button>
   <ul class="dropdown-menu">
-    <li><router-link to="/Cadastro" class="dropdown-item">Registrar-se</router-link></li>
-    <li><router-link to="/Login" class="dropdown-item">Conectar-se</router-link></li>
+    <li><router-link to="/cadastro" class="dropdown-item">Registrar-se</router-link></li>
+    <li><router-link to="/login" class="dropdown-item">Conectar-se</router-link></li>
   </ul>
 </div>
     </div>

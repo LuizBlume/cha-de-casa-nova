@@ -14,39 +14,62 @@
       <div class="inferior">
         <h4>Já tem uma conta?</h4>
         <p>Faça o login aqui!</p>
-        <router-link to="/Login" class="router">
+        <router-link to="/login" class="router">
           <button class="btn btn-secondary btn-reg">Login</button>
         </router-link>
       </div>
     </div>
     <div class="col-8">
-      <h1 class="h1-header">Cadastro</h1>
-      <div class="box">
-        <div class="inputBox">
-          <input type="text" name="nome" id="nome" class="inputUser" required />
-          <label for="nome" class="labelInput">Nome Completo</label>
-        </div>
-      </div>
-      <div class="box2">
-        <div class="inputBox">
-          <input
-            type="password"
-            name="senha"
-            id="senha"
-            class="inputUser"
-            required
-          />
-          <label for="senha" class="labelInput">Senha</label>
-        </div>
-      </div>
-      <div class="botao-reg">
-        <router-link to="/Login" class="router">
-          <button class="btn btn-secondary btn-reg">Cadastrar-se</button>
-        </router-link>
-      </div>
+      <form @submit.prevent="cadastrar">
+          <h1 class="h1-header">Cadastro</h1>
+          <div class="box">
+            <div class="inputBox">
+              <input type="text" name="nome" id="nome" class="inputUser" v-model="email" required />
+              <label for="nome" class="labelInput">Email</label>
+            </div>
+          </div>
+          <div class="box2">
+            <div class="inputBox">
+              <input type="password" name="senha" id="senha" class="inputUser" v-model="senha" required />
+              <label for="senha" class="labelInput">Senha</label>
+            </div>
+          </div>
+          <div class="botao-reg">
+              <button type="submit" class="btn btn-secondary btn-reg">Cadastrar-se</button>
+          </div>
+      </form>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { firebaseApp } from "../firebase";
+import { emailCadastrado } from '../functions/functions'
+
+const email = ref('');
+const senha = ref('');
+const emailJaExiste = ref(false)
+
+async function cadastrar() {
+    try {
+        const auth = getAuth();
+
+        await createUserWithEmailAndPassword(auth, email.value, senha.value).then((res) => {
+            console.log(res)
+        })
+    } catch (error) {
+        if (error.code === 'auth/email-already-in-use') {
+            emailJaExiste.value = true;
+            console.log("Este email já existe!");
+        } else {
+            console.error("Erro ao cadastrar usuário:", error);
+        }
+    }
+}
+</script>
+
 <style scoped>
 .h1-header {
   color: #2c2c2c;

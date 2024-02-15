@@ -11,7 +11,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -27,7 +27,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -43,7 +43,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -75,7 +75,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -91,7 +91,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -107,7 +107,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -123,7 +123,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -139,7 +139,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -155,7 +155,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -171,7 +171,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -187,7 +187,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>
@@ -203,7 +203,7 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
+            <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <link
+    <link
     href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
     rel="stylesheet"
   />
@@ -14,7 +14,7 @@
       <div class="inferior">
         <h4>Não tem uma conta?</h4>
         <p>Crie uma aqui!</p>
-        <router-link to="/Cadastro" class="router">
+        <router-link to="/cadastro" class="router">
           <button class="btn btn-secondary btn-reg">Cadastrar-se</button>
         </router-link>
       </div>
@@ -24,7 +24,7 @@
       <div class="box">
         <div class="inputBox">
           <input type="text" name="nome" id="nome" class="inputUser" required />
-          <label for="nome" class="labelInput">Nome Completo</label>
+          <label for="nome" class="labelInput">Email</label>
         </div>
       </div>
       <div class="box2">
@@ -47,6 +47,7 @@
     </div>
   </div>
 </template>
+
 <style scoped>
 .h1-header {
   color: #2c2c2c;
