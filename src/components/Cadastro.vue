@@ -44,13 +44,14 @@
 
 <script setup>
 import { ref } from "vue";
+import { useRouter } from "vue-router"
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { firebaseApp } from "../firebase";
-import { emailCadastrado } from '../functions/functions'
 
 const email = ref('');
 const senha = ref('');
 const emailJaExiste = ref(false)
+const router = useRouter();
 
 async function cadastrar() {
     try {
@@ -58,6 +59,7 @@ async function cadastrar() {
 
         await createUserWithEmailAndPassword(auth, email.value, senha.value).then((res) => {
             console.log(res)
+            router.push({ path: '/login' })
         })
     } catch (error) {
         if (error.code === 'auth/email-already-in-use') {

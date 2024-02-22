@@ -20,33 +20,52 @@
       </div>
     </div>
     <div class="col-8">
-      <h1 class="h1-header">Login</h1>
-      <div class="box">
-        <div class="inputBox">
-          <input type="text" name="nome" id="nome" class="inputUser" required />
-          <label for="nome" class="labelInput">Email</label>
+      <form @submit.prevent="logar">
+        <h1 class="h1-header">Login</h1>
+        <div class="box">
+          <div class="inputBox">
+            <input type="text" name="nome" id="nome" class="inputUser" v-model="email" required />
+              <label for="nome" class="labelInput">Email</label>
+          </div>
         </div>
-      </div>
-      <div class="box2">
-        <div class="inputBox">
-          <input
-            type="password"
-            name="senha"
-            id="senha"
-            class="inputUser"
-            required
-          />
-          <label for="senha" class="labelInput">Senha</label>
+        <div class="box2">
+          <div class="inputBox">
+            <input type="password" name="senha" id="senha" class="inputUser" v-model="senha" required />
+              <label for="senha" class="labelInput">Senha</label>
+          </div>
         </div>
+        <div class="botao-reg">
+              <button type="submit" class="btn btn-secondary btn-reg">Conectar-se</button>
+          </div>
+        </form>
       </div>
-      <div class="botao-reg">
-        <router-link to="/" class="router">
-          <button class="btn btn-secondary btn-reg">Conectar-se</button>
-        </router-link>
-      </div>
-    </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { firebaseApp } from "../firebase";
+
+const email = ref('');
+const senha = ref('');
+const router = useRouter();
+
+async function logar() {
+  try {
+    const auth = getAuth();
+
+    await signInWithEmailAndPassword(auth, email.value, senha.value).then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        router.push({ path: '/' })
+    })
+  } catch(error) {
+    console.error("Erro ao logar o usuário:", error);
+  }
+}
+</script>
 
 <style scoped>
 .h1-header {

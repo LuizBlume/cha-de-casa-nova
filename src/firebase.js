@@ -11,7 +11,7 @@ const firebaseConfig = {
   projectId: "cha-de-casa-nova-78b79",
   storageBucket: "cha-de-casa-nova-78b79.appspot.com",
   messagingSenderId: "622027190554",
-  appId: "1:622027190554:web:80c83807dd64903d2cfca3"
+  appId: "1:62202 7190554:web:80c83807dd64903d2cfca3"
 };
 
 // Initialize Firebase
