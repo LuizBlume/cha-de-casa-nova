@@ -1,25 +1,48 @@
 <template>
-  <div>
-    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
-    <header>
-      <h1 class="h1-header">Chá de Casa Nova</h1>
-      <h3 class="h3-v">Victor</h3>
-      <h3 class="h3-i">&</h3>
-      <h3 class="h3-r">Raissa</h3>
-    </header>
-    <div class="subheader">
-      <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Registrar ou Conectar
-  </button>
-  <ul class="dropdown-menu">
-    <li><router-link to="/cadastro" class="dropdown-item">Registrar-se</router-link></li>
-    <li><router-link to="/login" class="dropdown-item">Conectar-se</router-link></li>
-  </ul>
-</div>
+    <div>
+        <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+        <header>
+          <h1 class="h1-header">Chá de Casa Nova</h1>
+          <h3 class="h3-v">Victor</h3>
+          <h3 class="h3-i">&</h3>
+          <h3 class="h3-r">Raissa</h3>
+        </header>
+        <div class="subheader">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Registrar ou Conectar
+            </button>
+
+            <ul class="dropdown-menu">
+              <li class="dropdown-item"></li>
+              <li class="dropdown-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                  </svg>Sair</li>
+            </ul>
+
+            <!-- <ul v-else class="dropdown-menu">
+              <li><router-link to="/cadastro" class="dropdown-item">Registrar-se</router-link></li>
+              <li><router-link to="/login" class="dropdown-item">Conectar-se</router-link></li>
+            </ul> -->
+        </div>
+      </div>
     </div>
-  </div>
 </template>
+
+<script setup>
+import { ref, defineProps } from "vue"
+
+// const props = defineProps[{
+//   usuario: {
+//     type: Object
+//   }
+// }]
+
+// console.log(props.usuario);
+</script>
+
 <style scoped>
 .btn {
   background: linear-gradient(#ad5631, #bf6f4e);
@@ -28,6 +51,10 @@
 }
 .dropdown-menu.show {
   background-color: #c58f78;
+}
+
+.dropdown-menu.show > li {
+  margin-bottom: 5px;
 }
 .dropdown-item:hover {
   background-color: #c59682;

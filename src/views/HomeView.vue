@@ -2,32 +2,34 @@
 import Header from '../components/Header.vue'
 import Cards from '../components/Cards.vue';
 import Footer from '../components/Footer.vue'
-
-import { ref, onMounted } from "vue"
-import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth"
+import { ref, onMounted, nextTick } from "vue"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { firebaseApp } from "../firebase"
 
-const token = ref(null);
+const usuario = ref(null);
+const showHeader = ref(false);
 
-onMounted(() => {
+onMounted(async () => {
   const auth = getAuth();
 
-  setPersistence(auth, browserLocalPersistence).then(() => {
-    console.log("Persistência definida como local!")
-  })
-  .catch((error) => {
-    console.error("Erro ao definir a persistência:", error)
+  await nextTick();
+  
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      usuario.value = user
+      showHeader.value = true;
+      console.log(usuario.value);
+    } else {
+      console.log("Nenhum usuário logado");
+    }
   })
 
-  const user = auth.currentUser;
-  
-  console.log(user)
 })
 </script>
 
 <template>
   <div class="background">
-    <Header />
+    <Header v-if="showHeader" :usuario="usuario" />
     <Cards />
     <Footer />
   </div>
