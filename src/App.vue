@@ -7,10 +7,11 @@
 <script setup>
 import { RouterLink, RouterView } from "vue-router"
 import { ref, onMounted } from "vue"
+import { useUsuarioStore } from "./stores/usuario"
 import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged} from "firebase/auth"
 import { firebaseApp } from "./firebase"
 
-const usuario = ref(null);
+const storeUsuario = useUsuarioStore();
 
 onMounted(() => {
   const auth = getAuth();
@@ -24,9 +25,10 @@ onMounted(() => {
   
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      usuario.value = user
-      console.log(usuario.value);
+      storeUsuario.usuario = user;
+      console.log(storeUsuario.usuario);
     } else {
+      storeUsuario.usuario = false
       console.log("Nenhum usuário logado");
     }
   })

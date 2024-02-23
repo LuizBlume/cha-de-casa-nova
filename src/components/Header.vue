@@ -13,19 +13,19 @@
               Registrar ou Conectar
             </button>
 
-            <ul class="dropdown-menu">
-              <li class="dropdown-item"></li>
-              <li class="dropdown-item">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+            <ul v-if="verificacaoUsuario.usuario" class="dropdown-menu">
+              <li class="dropdown-item email">{{ verificacaoUsuario.usuario.email }}</li>
+              <li class="dropdown-item-logout ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-arrow-right svg-logout" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
                   </svg>Sair</li>
             </ul>
 
-            <!-- <ul v-else class="dropdown-menu">
+            <ul v-else class="dropdown-menu">
               <li><router-link to="/cadastro" class="dropdown-item">Registrar-se</router-link></li>
               <li><router-link to="/login" class="dropdown-item">Conectar-se</router-link></li>
-            </ul> -->
+            </ul>
         </div>
       </div>
     </div>
@@ -33,14 +33,9 @@
 
 <script setup>
 import { ref, defineProps } from "vue"
+import { useUsuarioStore } from "../stores/usuario"
 
-// const props = defineProps[{
-//   usuario: {
-//     type: Object
-//   }
-// }]
-
-// console.log(props.usuario);
+const verificacaoUsuario = useUsuarioStore();
 </script>
 
 <style scoped>
@@ -56,8 +51,9 @@ import { ref, defineProps } from "vue"
 .dropdown-menu.show > li {
   margin-bottom: 5px;
 }
-.dropdown-item:hover {
+.dropdown-item:hover, .dropdown-item-logout:hover {
   background-color: #c59682;
+  cursor: pointer;
 }
 .dropdown-item {
   color: #fdfdfd;
@@ -69,6 +65,23 @@ import { ref, defineProps } from "vue"
   justify-content: center;
   align-items: flex-start;
 }
+
+.dropdown-item-logout {
+  color: #fdfdfd;
+  font-style: normal;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.email {
+  font-size: 1.2rem !important;
+}
+
 .h1-header {
   color: #2c2c2c;
   font-family: "Kaushan Script";
@@ -134,6 +147,11 @@ header {
     .subheader {
       height: 8vw !important;
     }
+
+    .col {
+      margin: 20px 0 5px 0;
+    }
+
     .dropdown, .btn {
       top: 15px;
       width: 173px;
@@ -157,20 +175,32 @@ header {
     .subheader {
       height: 6vw;
     }
+
+    .col {
+      margin: 20px 0 5px 0;
+    }
+
     .dropdown, .btn {
       top: 15px;
-      width: 173px;
+      width: 200px;
       font-size: 14px;
       height: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      right: 22px;
     }
     .dropdown-menu.show {
-      width: 170px;
+      position: absolute!important;
+      right: 10px!important;
+      width: 190px!important;
     }
-    .dropdown-item {
-      font-size: 16px;
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1rem!important;
+    }
+    .email {
+      font-size: 0.8rem!important;
     }
   }
    @media (min-width: 376px) and (max-width: 425px) {
@@ -186,20 +216,35 @@ header {
     .subheader {
       height: 6vw;
     }
+
+    .col {
+      margin: 20px 0 5px 0;
+    }
+
     .dropdown, .btn {
       top: 12px;
-      width: 173px;
+      width: 200px;
       font-size: 14px;
-      height: 25px;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    .dropdown-menu.show {
-      width: 170px;
+
+    .dropdown {
+      margin-top: 5px;
+      position: relative;
+      right: 22px;
     }
-    .dropdown-item {
-      font-size: 16px;
+
+    .dropdown-menu.show {
+      width: 190px;
+    }
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1rem!important;
+    }
+    .email {
+      font-size: 0.8rem!important;
     }
   }
   @media (min-width: 426px) and (max-width: 539px) {
@@ -223,11 +268,14 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
+      position: relative;
+      right: 22px;
     }
     .dropdown-menu.show {
-      width: 170px;
+      width: 198px;
     }
-    .dropdown-item {
+    .dropdown-item, .dropdown-item-logout {
       font-size: 16px;
     }
   }
@@ -244,11 +292,21 @@ header {
     .subheader {
       height: 7vw;
     }
-    .dropdown-menu.show {
-      width: 193px;
+
+    .dropdown {
+      margin-top: 20px;
+      position: relative;
+      right: 22px;
     }
-    .dropdown-item {
-      font-size: 20px;
+
+    .dropdown-menu.show {
+      width: 198px;
+    }
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1rem!important;
+    }
+    .email {
+      font-size: 0.8rem!important;
     }
   }
   @media (min-width: 769px) and (max-width: 1024px) {
@@ -264,11 +322,21 @@ header {
     .subheader {
       height: 6vw;
     }
+
+    .dropdown {
+      margin-top: 20px;
+      position: relative;
+      right: 22px;
+    }
+
     .dropdown-menu.show {
       width: 192px;
     }
-    .dropdown-item {
-      font-size: 20px;
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1rem;
+    }
+    .email {
+      font-size: 0.8rem!important;
     }
   }
   @media (min-width: 1025px) and (max-width: 1240px) {
@@ -291,11 +359,14 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
+      position: relative;
+      right: 10px;
     }
     .dropdown-menu.show {
       width: 200px;
     }
-    .dropdown-item {
+    .dropdown-item, .dropdown-item-logout {
       font-size: 22px;
     }
   }
@@ -319,12 +390,18 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
+      position: relative;
+      right: 10px;
     }
     .dropdown-menu.show {
       width: 240px;
     }
-    .dropdown-item {
+    .dropdown-item, .dropdown-item-logout {
       font-size: 24px;
+    }
+    .email {
+      font-size: 1rem!important;
     }
   }
   @media (min-width: 1441px) and (max-width: 1620px) {
@@ -347,12 +424,18 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin-top: 20px;
+      position: relative;
+      right: 10px;
     }
     .dropdown-menu.show {
       width: 290px;
     }
-    .dropdown-item {
-      font-size: 30px;
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1.4rem;
+    }
+    .email {
+      font-size: 1.2rem!important;
     }
   }
   @media (min-width: 1621px) and (max-width: 1920px) {
@@ -379,8 +462,11 @@ header {
     .dropdown-menu.show {
       width: 340px;
     }
-    .dropdown-item {
-      font-size: 32px;
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1.2rem;
+    }
+    .email {
+      font-size: 1rem!important;
     }
   }
   @media (min-width: 1921px) and (max-width: 2200px) {
@@ -407,8 +493,8 @@ header {
     .dropdown-menu.show {
       width: 440px;
     }
-    .dropdown-item {
-      font-size: 40px;
+    .dropdown-item, .dropdown-item-logout {
+      font-size: 1.2rem;
     }
   }
   @media (min-width: 2201px) and (max-width: 2560px) {
@@ -435,7 +521,7 @@ header {
     .dropdown-menu.show {
       width: 440px;
     }
-    .dropdown-item {
+    .dropdown-item, .dropdown-item-logout {
       font-size: 40px;
     }
   }

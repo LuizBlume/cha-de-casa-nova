@@ -6,7 +6,7 @@ import Footer from '../components/Footer.vue'
 
 <template>
   <div class="background">
-    <Header v-if="showHeader" :usuario="usuario" />
+    <Header />
     <Cards />
     <Footer />
   </div>
