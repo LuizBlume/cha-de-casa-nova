@@ -15,8 +15,8 @@
 
             <ul v-if="verificacaoUsuario.usuario" class="dropdown-menu">
               <li class="dropdown-item email">{{ verificacaoUsuario.usuario.email }}</li>
-              <li class="dropdown-item-logout ">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-arrow-right svg-logout" viewBox="0 0 16 16">
+              <li class="dropdown-item-logout" @click="deslogarUsuario.logoutUsuario = true; deslogarUsuario.handleLogout()">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-box-arrow-right svg-logout" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
                   </svg>Sair</li>
@@ -32,10 +32,12 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue"
+import { ref } from "vue"
 import { useUsuarioStore } from "../stores/usuario"
+import { useLogoutStore } from "../stores/logout"
 
 const verificacaoUsuario = useUsuarioStore();
+const deslogarUsuario = useLogoutStore();
 </script>
 
 <style scoped>
@@ -463,10 +465,15 @@ header {
       width: 340px;
     }
     .dropdown-item, .dropdown-item-logout {
-      font-size: 1.2rem;
+      font-size: 1.8rem;
     }
+
+    .dropdown-menu.show > .dropdown-item-logout {
+      margin-right: 5px;
+    }
+
     .email {
-      font-size: 1rem!important;
+      font-size: 1.3rem!important;
     }
   }
   @media (min-width: 1921px) and (max-width: 2200px) {

@@ -22,14 +22,14 @@ onMounted(() => {
   .catch((error) => {
     console.error("Erro ao definir a persistência:", error)
   })
-  
+
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      storeUsuario.usuario = user;
-      console.log(storeUsuario.usuario);
+        storeUsuario.usuario = user;
+        console.log(storeUsuario.usuario);
     } else {
-      storeUsuario.usuario = false
-      console.log("Nenhum usuário logado");
+        storeUsuario.usuario = false
+        console.log("Nenhum usuário logado", user);
     }
   })
 })
