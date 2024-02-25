@@ -46,6 +46,10 @@ const deslogarUsuario = useLogoutStore();
   border: none;
   margin-right: 10px;
 }
+.link-home {
+  text-decoration: none;
+  color: #2c2c2c;
+}
 .dropdown-menu.show {
   background-color: #c58f78;
 }
@@ -95,8 +99,10 @@ const deslogarUsuario = useLogoutStore();
   justify-content: center;
   align-items: flex-start;
 }
-.h3-v, .h3-i, .h3-r {
-  color: #2c2c2c q   ;
+.h3-v,
+.h3-i,
+.h3-r {
+  color: #2c2c2c q;
   font-family: "Kaushan Script";
   font-style: normal;
   font-size: 30px;
@@ -116,8 +122,8 @@ const deslogarUsuario = useLogoutStore();
   right: 5px;
 }
 .h3-r {
- padding-left: 124px;
- bottom: 89px;
+  padding-left: 124px;
+  bottom: 89px;
 }
 header {
   background-color: #bf6f4e;
@@ -132,7 +138,8 @@ header {
   justify-content: flex-end;
   align-items: center;
 }
-.g-4, .gx-4 {
+.g-4,
+.gx-4 {
   --bs-gutter-x: 0;
   --bs-gutter-y: 0;
 }

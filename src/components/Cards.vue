@@ -13,6 +13,12 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Disponível</router-link>
+          </button>
+        </div>
+        <div class="card-footer">
+          <p>lorem</p>
         </div>
       </div>
     </div>
@@ -28,6 +34,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -45,6 +54,9 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -60,6 +72,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -77,6 +92,9 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -92,6 +110,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -109,6 +130,9 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -124,6 +148,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -141,6 +168,9 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -156,6 +186,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -173,6 +206,9 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
+          </button>
         </div>
       </div>
     </div>
@@ -188,6 +224,9 @@
         <div class="card-footer">
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
+          </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Indisponível</router-link>
           </button>
         </div>
       </div>
@@ -205,12 +244,27 @@
           <button class="comprar">
             <router-link to="/escolha" class="escolher">Escolher</router-link>
           </button>
+          <button class="comprar">
+            <router-link to="" class="escolher esg disp">Disponível</router-link>
+          </button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <style scoped>
+.esg {
+  background-color: #202020;
+  color: #e03333 !important;
+  text-align: center;
+  margin: 0;
+}
+.disp {
+  background-color: #202020;
+  color: #1add1a !important;
+  text-align: center;
+  margin: 0;
+}
 .row {
   padding: 10px 20px 10px 20px;
   background-color: #D5B6A2;
@@ -244,6 +298,11 @@
   flex-direction: column !important;
   justify-content: center !important;
   align-items: flex-start !important;
+}
+.card-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 @media (width: 320px) {
   .card-img-top {
