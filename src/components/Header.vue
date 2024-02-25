@@ -13,6 +13,18 @@
       </router-link>
     </header>
     <div class="subheader">
+      <div class="button-car">
+        <div class="dropdown">
+        <router-link to="/Carrinho" class="link-car">
+        <button
+          class="btn btn-secondary"
+          type="button"
+        >
+          <img src="../assets/images/icon-carrinho.png" class="icon-car" width="20px" alt="">Carrinho
+        </button>
+        </router-link>
+      </div>
+      </div>
       <div class="dropdown">
         <button
           class="btn btn-secondary dropdown-toggle"
@@ -39,6 +51,17 @@
   </div>
 </template>
 <style scoped>
+.button-car {
+  margin-left: 10px;
+  border-radius: 5px;
+}
+.icon-car {
+  margin-right: 5px;
+}
+.link-car {
+  text-decoration: none;
+  color: #2c2c2c;
+}
 .btn {
   background: linear-gradient(#ad5631, #bf6f4e);
   border: none;
@@ -111,7 +134,7 @@ header {
   width: 100%;
   height: 3vw;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 .g-4,
