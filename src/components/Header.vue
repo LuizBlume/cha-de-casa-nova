@@ -1,20 +1,33 @@
 <template>
-    <div>
+    <div ref="headerElement">
         <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
         <header>
-          <h1 class="h1-header">Chá de Casa Nova</h1>
-          <h3 class="h3-v">Victor</h3>
-          <h3 class="h3-i">&</h3>
-          <h3 class="h3-r">Raissa</h3>
+          <router-link to="/">
+            <h1 class="h1-header">Chá de Casa Nova</h1>
+            <h3 class="h3-v">Victor</h3>
+            <h3 class="h3-i">&</h3>
+            <h3 class="h3-r">Raissa</h3>
+          </router-link>
         </header>
         <div class="subheader">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button v-if="verificacaoUsuario.trueUsuario" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Registrar ou Conectar
+            </button>
+
+            <button v-else class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Configurações
+              <span class="icon-settings">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115z"/>
+              </svg>
+              </span>
             </button>
 
             <ul v-if="verificacaoUsuario.usuario" class="dropdown-menu">
               <li class="dropdown-item email">{{ verificacaoUsuario.usuario.email }}</li>
+              <li class="dropdown-item add"><router-link to="/add-produto">Adicionar novo produto</router-link></li>
               <li class="dropdown-item-logout" @click="deslogarUsuario.logoutUsuario = true; deslogarUsuario.handleLogout()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-box-arrow-right svg-logout" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
@@ -32,15 +45,43 @@
 </template>
 
 <script setup>
-import { ref } from "vue"
+import { ref, onMounted, nextTick } from "vue"
 import { useUsuarioStore } from "../stores/usuario"
 import { useLogoutStore } from "../stores/logout"
 
 const verificacaoUsuario = useUsuarioStore();
+
+console.log(verificacaoUsuario.trueUsuario)
+
 const deslogarUsuario = useLogoutStore();
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: #2c2c2c;
+}
+
+header {
+  background-color: #bf6f4e;
+  width: 100%;
+  height: 6vw;
+}
+.subheader {
+  background: linear-gradient(#bf6f4e, #d5b6a2);
+  width: 100%;
+  height: 3vw;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon-settings {
+  position: relative;
+  left: 10px;
+  bottom: .5px;
+}
+
 .btn {
   background: linear-gradient(#ad5631, #bf6f4e);
   border: none;
@@ -88,6 +129,10 @@ const deslogarUsuario = useLogoutStore();
   font-size: 1.2rem !important;
 }
 
+.add > a {
+  color: #fdfdfd!important;
+}
+
 .h1-header {
   color: #2c2c2c;
   font-family: "Kaushan Script";
@@ -124,19 +169,6 @@ const deslogarUsuario = useLogoutStore();
 .h3-r {
   padding-left: 124px;
   bottom: 89px;
-}
-header {
-  background-color: #bf6f4e;
-  width: 100%;
-  height: 6vw;
-}
-.subheader {
-  background: linear-gradient(#bf6f4e, #d5b6a2);
-  width: 100%;
-  height: 3vw;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 .g-4,
 .gx-4 {
@@ -461,9 +493,10 @@ header {
       height: 6vw;
     }
     .dropdown, .btn {
-      width: 350px;
-      font-size: 24px;
-      height: 55px;
+      width: 330px;
+      font-size: 28px;
+      height: 45px;
+      margin-top: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -471,18 +504,25 @@ header {
       right: 10px;
     }
     .dropdown-menu.show {
-      width: 340px;
+      width: 320px;
     }
     .dropdown-item, .dropdown-item-logout {
+      /* display: flex;
+      justify-content: flex-start; */
       font-size: 1.8rem;
     }
 
     .dropdown-menu.show > .dropdown-item-logout {
-      margin-right: 5px;
+      display: flex;
+      justify-content: center;
     }
 
     .email {
       font-size: 1.3rem!important;
+    }
+
+    .add {
+      font-size: 1.5rem!important;
     }
   }
   @media (min-width: 1921px) and (max-width: 2200px) {

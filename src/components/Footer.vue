@@ -4,7 +4,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap"
       rel="stylesheet"
     />
-    <div class="footer">
+    <div class="footer" :style="props.footerAdd">
       <h3 class="h3-footer">
         <div class="copy">&copy;</div>
         2024 - Todos os direitos reservados.
@@ -12,16 +12,20 @@
     </div>
   </footer>
 </template>
+
+<script setup>
+import { defineProps } from "vue"
+
+const props = defineProps({
+  footerAdd: {
+    type: Object,
+    default: () => ({})
+  }
+})
+</script>
+
+
 <style scoped>
-footer {
-  margin-top: 20px;
-  background-color: #bf6f4e;
-  width: 100%;
-  height: 8vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .footer {
   margin-top: 20px;
   background-color: #bf6f4e;
@@ -31,6 +35,7 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
 .h3-footer {
   color: #2c2c2c;
   font-family: "Kaushan Script";

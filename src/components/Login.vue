@@ -36,7 +36,7 @@
         </div>
         <div class="botao-reg">
               <button type="submit" class="btn btn-secondary btn-reg">Conectar-se</button>
-          </div>
+        </div>
         </form>
       </div>
   </div>

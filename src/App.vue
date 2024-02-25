@@ -14,6 +14,7 @@ import { firebaseApp } from "./firebase"
 const storeUsuario = useUsuarioStore();
 
 onMounted(() => {
+  document.documentElement.style.height = '100vh'
   const auth = getAuth();
 
     setPersistence(auth, browserLocalPersistence).then(() => {
