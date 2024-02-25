@@ -460,6 +460,8 @@ header {
       display: flex;
       justify-content: center;
       align-items: center;
+      position: relative;
+      right: 10px;
     }
     .dropdown-menu.show {
       width: 340px;
