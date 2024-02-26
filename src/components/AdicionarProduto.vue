@@ -12,11 +12,11 @@
         </div>
 
         <div class="container-input">
-          <input type="text" id="nomeProduto" class="inputProduct" v-model="nomeProduto" required />
+          <input type="text" id="nomeProduto" class="inputProduct" v-model="dados.nome" required />
           <label for="nomeProduto" class="labelProduct">Nome</label>
         </div>
         <div class="container-input">
-          <input type="text" id="estoqueProduto" class="inputProduct" v-model="estoqueProduto" required />
+          <input type="text" id="estoqueProduto" class="inputProduct" v-model="dados.estoque" required />
           <label for="estoqueProduto" class="labelProduct">Estoque</label>
         </div>
         <div class="container-input">
@@ -25,7 +25,7 @@
         </div>
         <div class="container-input">
           <label for="descricaoProduto" class="labelDescription">Descrição</label>
-          <textarea cols="30" rows="10" id="descricaoProduto" class="textareaProduct" v-model="descricaoProduto" placeholder="Descreva o produto..." required></textarea>
+          <textarea cols="30" rows="10" id="descricaoProduto" class="textareaProduct" v-model="dados.descricao" placeholder="Descreva o produto..." required></textarea>
         </div>
         <div class="container-submit">
             <button type="submit" class="btn btn-secondary btn-reg">Adicionar</button>
@@ -37,36 +37,83 @@
 
 <script setup>
 import { onMounted } from "vue"
+import { db } from "../firebase"
+import { doc, collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore"
 import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 import { firebaseApp, storage } from "../firebase"
 
-const nomeProduto = ref('');
-const estoqueProduto = ref('');
+const dados = ref({
+  nome: '',
+  estoque: 0,
+  descricao: '',
+  url: '',
+})
+
+const url = ref([]);
+
 const upload = ref({});
-const descricaoProduto = ref('');
+
+const listImages = ref(storage, 'produtos/')
 
 function handleImage(event) {
     upload.value = event.target.files[0]
     console.log(upload.value)
 }
 
-async function adicionarProduto() {
-    if (upload.value) {
-        const storageRef = ref(storage, 'produtos/' + upload.value.name);
+async function uploadImages() {
+  if (upload.value) {
+          const storageRef = ref(storage, 'produtos/' + upload.value.name);
 
-        const metadata = {
-            contentType: 'image/jpeg',
-        };
+          const metadata = {
+              contentType: 'image/jpeg',
+          };
 
-        try {
-            await uploadBytes(storageRef, upload.value, metadata)
-            console.log("Imagem enviada");
-        } catch (error) {
-            console.error("Erro ao enviar a imagem:", error);
+          try {
+              await uploadBytes(storageRef, upload.value, metadata)
+              console.log("Imagem enviada", upload.value.name);
+              getImages();
+          } catch (error) {
+              console.error("Erro ao enviar a imagem:", error);
+          }
+      } else {
+          console.log("No file selected");
+      }
+}
+
+async function getImages() {
+  listAll(listImages).then(async (res) => {
+
+    for (const item of res.items) {
+      if (item.name === upload.value.name) {
+        if (!Array.isArray(url.value)) {
+          url.value = [];
         }
-    } else {
-        console.log("No file selected");
+        const downloadURL = await getDownloadURL(item);
+    
+        url.value.push(downloadURL);
+
+        // if (Array.isArray(url.value) && url.value.length > 0) {
+        //   dados.value.url = url.value[0];
+        // }
+
+        addOuAtualizarProduto();
+      }
     }
+  }).catch((error) => {
+    console.error("Erro ao pegar URL da imagem:", error);
+  })
+}
+
+async function addOuAtualizarProduto() {
+  await addDoc(collection(db, 'produtos'), dados.value).then((res) => {
+    console.log("Post concluído com sucesso!");
+  }).catch((error) => {
+    console.error("Erro ao tentar realizar o post:", error);
+  })
+}
+
+async function adicionarProduto() {
+    uploadImages();
 }
 </script>
 
@@ -126,6 +173,7 @@ async function adicionarProduto() {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
     background: #e6b696;
+    resize: none;
 }
 
 .labelProduct {
