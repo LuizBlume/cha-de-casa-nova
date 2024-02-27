@@ -104,6 +104,7 @@ async function getImages() {
 async function addOuAtualizarProduto() {
   await addDoc(collection(db, 'produtos'), formData.value).then((res) => {
     console.log("Post concluído com sucesso!");
+    location.reload()
   }).catch((error) => {
     console.error("Erro ao tentar realizar o post:", error);
   })
