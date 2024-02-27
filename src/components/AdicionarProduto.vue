@@ -6,17 +6,17 @@
     />
 
     <div>
-      <form @submit.prevent="adicionarProduto" class="form-add-product">
+      <form @submit.prevent="adicionarProduto()" class="form-add-product">
         <div class="title-container">
           <legend class="title-add">Novo produto</legend>
         </div>
 
         <div class="container-input">
-          <input type="text" id="nomeProduto" class="inputProduct" v-model="dados.nome" required />
+          <input type="text" id="nomeProduto" class="inputProduct" v-model="formData.nome" required />
           <label for="nomeProduto" class="labelProduct">Nome</label>
         </div>
         <div class="container-input">
-          <input type="text" id="estoqueProduto" class="inputProduct" v-model="dados.estoque" required />
+          <input type="text" id="estoqueProduto" class="inputProduct" v-model="formData.estoque" required />
           <label for="estoqueProduto" class="labelProduct">Estoque</label>
         </div>
         <div class="container-input">
@@ -25,7 +25,7 @@
         </div>
         <div class="container-input">
           <label for="descricaoProduto" class="labelDescription">Descrição</label>
-          <textarea cols="30" rows="10" id="descricaoProduto" class="textareaProduct" v-model="dados.descricao" placeholder="Descreva o produto..." required></textarea>
+          <textarea cols="30" rows="10" id="descricaoProduto" class="textareaProduct" v-model="formData.descricao" placeholder="Descreva o produto..." required></textarea>
         </div>
         <div class="container-submit">
             <button type="submit" class="btn btn-secondary btn-reg">Adicionar</button>
@@ -36,24 +36,24 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { ref as vueRef, onMounted } from "vue"
 import { db } from "../firebase"
 import { doc, collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore"
-import { ref, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
+import { ref as firebaseRef, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 import { firebaseApp, storage } from "../firebase"
 
-const dados = ref({
+const formData = vueRef({
   nome: '',
   estoque: 0,
   descricao: '',
-  url: '',
-})
+  url: ''
+});
 
-const url = ref([]);
+const url = vueRef([]);
 
-const upload = ref({});
+const upload = vueRef({});
 
-const listImages = ref(storage, 'produtos/')
+const listImages = firebaseRef(storage, 'produtos/')
 
 function handleImage(event) {
     upload.value = event.target.files[0]
@@ -62,7 +62,7 @@ function handleImage(event) {
 
 async function uploadImages() {
   if (upload.value) {
-          const storageRef = ref(storage, 'produtos/' + upload.value.name);
+          const storageRef = firebaseRef(storage, 'produtos/' + upload.value.name);
 
           const metadata = {
               contentType: 'image/jpeg',
@@ -85,17 +85,14 @@ async function getImages() {
 
     for (const item of res.items) {
       if (item.name === upload.value.name) {
-        if (!Array.isArray(url.value)) {
-          url.value = [];
-        }
-        const downloadURL = await getDownloadURL(item);
-    
-        url.value.push(downloadURL);
-
-        // if (Array.isArray(url.value) && url.value.length > 0) {
-        //   dados.value.url = url.value[0];
+        // if (!Array.isArray(url.value)) {
+        //   url.value = [];
         // }
+        const downloadURL = await getDownloadURL(item);
 
+        formData.value.url = downloadURL;
+
+        console.log(formData.value.url);
         addOuAtualizarProduto();
       }
     }
@@ -105,14 +102,14 @@ async function getImages() {
 }
 
 async function addOuAtualizarProduto() {
-  await addDoc(collection(db, 'produtos'), dados.value).then((res) => {
+  await addDoc(collection(db, 'produtos'), formData.value).then((res) => {
     console.log("Post concluído com sucesso!");
   }).catch((error) => {
     console.error("Erro ao tentar realizar o post:", error);
   })
 }
 
-async function adicionarProduto() {
+function adicionarProduto() {
     uploadImages();
 }
 </script>
