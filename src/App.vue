@@ -26,8 +26,8 @@ onMounted(() => {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-        storeUsuario.usuario = user;
-        console.log(storeUsuario.usuario);
+        storeUsuario.trueUsuario = user;
+        console.log(storeUsuario.trueUsuario);
     } else {
         storeUsuario.usuario = false
         console.log("Nenhum usuário logado", user);

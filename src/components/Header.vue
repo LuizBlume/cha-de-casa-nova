@@ -11,7 +11,7 @@
         </header>
         <div class="subheader">
           <div class="dropdown">
-            <button v-if="verificacaoUsuario.trueUsuario" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button v-if="verificacaoUsuario.trueUsuario === null" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               Registrar ou Conectar
             </button>
 
@@ -25,8 +25,8 @@
               </span>
             </button>
 
-            <ul v-if="verificacaoUsuario.usuario" class="dropdown-menu">
-              <li class="dropdown-item email">{{ verificacaoUsuario.usuario.email }}</li>
+            <ul v-if="verificacaoUsuario.trueUsuario" class="dropdown-menu">
+              <li class="dropdown-item email">{{ verificacaoUsuario.trueUsuario.email }}</li>
               <li class="dropdown-item add"><router-link to="/add-produto">Adicionar novo produto</router-link></li>
               <li class="dropdown-item-logout" @click="deslogarUsuario.logoutUsuario = true; deslogarUsuario.handleLogout()">
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-box-arrow-right svg-logout" viewBox="0 0 16 16">
@@ -48,12 +48,16 @@
 import { ref, onMounted, nextTick } from "vue"
 import { useUsuarioStore } from "../stores/usuario"
 import { useLogoutStore } from "../stores/logout"
-
+  
 const verificacaoUsuario = useUsuarioStore();
-
-console.log(verificacaoUsuario.trueUsuario)
-
 const deslogarUsuario = useLogoutStore();
+
+onMounted(async () => {
+  await nextTick();
+  console.log(verificacaoUsuario.trueUsuario)
+})
+
+
 </script>
 
 <style scoped>
