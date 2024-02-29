@@ -14,6 +14,8 @@ export const useLogoutStore = defineStore('logout', {
             await logout();
 
             this.logoutUsuario = false;
+
+            location.reload();
         }
     }
     }
