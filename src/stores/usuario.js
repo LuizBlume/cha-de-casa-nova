@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useUsuarioStore = defineStore('user', {
   state: () => ({
-    trueUsuario: null
+    trueUsuario: null,
+    isAdmin: null
   }),
 })

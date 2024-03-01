@@ -13,11 +13,9 @@
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/escolha" class="escolher">Escolher</router-link>
+            <router-link @click="produtoStore.dadosProduto = produto" to="/escolha" class="escolher">Escolher</router-link>
           </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Disponível</router-link>
-          </button>
+          <button class="comprar escolher esg disp">Disponível</button>
         </div>
         <div class="card-footer">
           <p>lorem</p>
@@ -29,10 +27,12 @@
 
 <script setup>
 import { ref, onMounted } from "vue"
+import { useProdutoStore } from "../stores/produtoEscolhido"
 import { doc, collection, getDocs } from "firebase/firestore"
 import { db } from "../firebase"
 
 const dadosProduto = ref([]);
+const produtoStore = useProdutoStore();
 
 onMounted(async () => {
   let docSnapshot = await getDocs(collection(db, 'produtos'));

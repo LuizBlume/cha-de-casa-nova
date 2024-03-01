@@ -10,8 +10,7 @@ import { ref, onMounted } from "vue"
 import { useUsuarioStore } from "./stores/usuario"
 import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged} from "firebase/auth"
 import { doc, collection, getDocs } from "firebase/firestore"
-import { db } from "./firebase"
-import { firebaseApp } from "./firebase"
+import { db, firebaseApp } from "./firebase"
 
 const adminData = ref([]);
 const storeUsuario = useUsuarioStore();
@@ -20,7 +19,7 @@ onMounted(async () => {
   document.documentElement.style.height = '100vh'
   const auth = getAuth();
 
-    setPersistence(auth, browserLocalPersistence).then(() => {
+  setPersistence(auth, browserLocalPersistence).then(() => {
     console.log("Persistência definida como local!")
   })
   .catch((error) => {
@@ -37,15 +36,17 @@ onMounted(async () => {
     }
   })
 
-  let getAdmins = await getDocs(collection(doc, "administradores"));
+  let getAdmins = await getDocs(collection(db, "administradores"));
 
   if (getAdmins) {
     getAdmins.forEach((admin) => {
-      adminData.value.push({...admin.data(), id: admin.id});
+      if (admin.data().email_usuario === storeUsuario.trueUsuario.email && storeUsuario.trueUsuario !== null) {
+        storeUsuario.isAdmin = true;
+        console.log("Você é um admin");
+      } else {
+        console.log("Você não é um admin");
+      }
     })
-    console.log(adminData.value, "Admin achado");
-  } else {
-    console.log("Nenhum admin cadastrado");
   }
 })
 </script>

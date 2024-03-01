@@ -58,3 +58,11 @@ export async function changePiniaUser() {
         console.error("Erro ao tentar achar um usuário", error);
     }
 }
+
+export function heightAdjust(alturaComponente, alturaHtml) {
+    if (alturaComponente.value.offsetHeight <= alturaHtml) {
+        alturaComponente.value.style.height = '100vh'
+    } else {
+        alturaComponente.value.style.height = 'auto'
+    }
+}
