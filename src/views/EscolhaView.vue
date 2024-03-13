@@ -1,32 +1,46 @@
-<script setup>
-import Header from "../components/Header.vue";
-</script>
 <template>
-  <Header />
-  <div class="row">
-    <div class="col-sm-4">
-      <h3>Jogo de Copos Nadir 465ml</h3>
-      <img
-        src="../assets/images/copos.jpg"
-        alt="Jogo de Copos Nadir 465ml"
-        width="350"
-        height="350"
-      />
-      <button class="comprar">
-        <router-link to="/Escolha" class="escolher">Confirmar</router-link>
-      </button>
+  <div class="containerEscolha" ref="escolhaComponente">
+    <Header />
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>{{ data.nome }}</h3>
+        <img :src="data.url" alt="Jogo de Copos Nadir 465ml" width="350" height="350" />
+        <button class="comprar">
+          <router-link to="/Escolha" class="escolher">Confirmar</router-link>
+        </button>
+      </div>
+      <div class="col-sm-8">
+        <h3 class="h3-escolha">
+          Temos a opção de você comprar o presente em uma loja de sua preferência
+          e levar no dia, ou se achar melhor pode realizar um PIX no QRcode abaixo
+        </h3>
+      </div>
+      <div class="qrcode">
+          <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
+      </div>
     </div>
-    <div class="col-sm-8">
-      <h3 class="h3-escolha">
-        Temos a opção de você comprar o presente em uma loja de sua preferência
-        e levar no dia, ou se achar melhor pode realizar um PIX no QRcode abaixo
-      </h3>
-    </div>
-    <div class="qrcode">
-        <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
-    </div>
+    <Footer />
   </div>
 </template>
+
+<script setup>
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+import { ref, onMounted, nextTick } from "vue"
+import { heightAdjust } from "../functions/functions"
+import { useProdutoStore } from "../stores/produtoEscolhido"
+
+const escolhaComponente = ref(null);
+const data = ref([]);
+const produto = useProdutoStore();
+
+onMounted(async () => {
+  await nextTick();
+  data.value = (await produto).dadosProduto;
+  console.log(data.value);
+})
+</script>
+
 <style scoped>
 .row {
   padding: 10px 20px 10px 20px;

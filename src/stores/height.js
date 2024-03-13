@@ -1,9 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useUsuarioStore = defineStore('user', {
+export const useHeightStore = defineStore('height', {
   state: () => ({
-    trueUsuario: null,
-    isAdmin: null
+    total: null
   }),
 })

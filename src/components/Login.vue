@@ -36,7 +36,8 @@
         </div>
         <div class="botao-reg">
               <button type="submit" class="btn btn-secondary btn-reg">Conectar-se</button>
-          </div>
+        </div>
+        <h2 v-if="showError" class="erroCredenciais">Email e/ou senha incorretos!</h2>
         </form>
       </div>
   </div>
@@ -46,11 +47,14 @@
 import { ref } from "vue"
 import { useRouter } from "vue-router"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { useReloadStore } from "../stores/reload"
 import { firebaseApp } from "../firebase";
 
 const email = ref('');
 const senha = ref('');
 const router = useRouter();
+const reloadStore = useReloadStore();
+const showError = ref(false);
 
 async function logar() {
   try {
@@ -59,9 +63,12 @@ async function logar() {
     await signInWithEmailAndPassword(auth, email.value, senha.value).then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        router.push({ path: '/' })
+        reloadStore.isReload = true;
+        router.push({ path: '/' });
     })
   } catch(error) {
+    showError.value = true
+    console.log(showError)
     console.error("Erro ao logar o usuário:", error);
   }
 }
@@ -204,6 +211,12 @@ p {
   background-color: #a88b77;
   color: #2c2c2c;
 }
+
+.erroCredenciais {
+  color: #91674b;
+  margin-left: 210px;
+}
+
 @media (max-width: 320px) {
   .h1-header {
     font-size: 40px;
