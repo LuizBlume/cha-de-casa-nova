@@ -2,8 +2,8 @@
   <div class="background">
     <Header />
     <Cards />
-    <Footer />
     <IconCarrinho />
+    <Footer />
   </div>
 </template>
 

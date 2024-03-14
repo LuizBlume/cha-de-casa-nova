@@ -19,6 +19,8 @@ import Footer from '../components/Footer.vue'
     "header"
     "main"
     "footer";
+    grid-template-rows: 1.5fr 3fr 1fr;
+    height: 100vh;
     background-color: #D5B6A2;
 }
 </style>
