@@ -1,66 +1,122 @@
 <template>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
-      rel="stylesheet"
-    />
-    <div class="container-pai">
-        <h1 class="titulo">Carrinho</h1>
-
-        <div class="produtos">
-            <div class="produto">
-                <h2 class="nome-produto">Escorredor de massas</h2>
-
-                <div class="quantidade">
-                    <button>+</button>
-                    <p>1</p>
-                    <button>-</button>
-                </div>
-
-                <div class="remover">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
+    rel="stylesheet"
+  />
+  <div class="grid">
+    <div
+      v-for="(produto, produtoIndex) in dadosProduto"
+      :key="produtoIndex"
+      class="g-col-6"
+    >
+      <div class="conteudo-produto">
+        <img :src="produto.url" alt="" width="100px" height="100px" />
+        <div class="nomes">
+          <h3>{{ produto.nome }}</h3>
+          <p>{{ produto.descricao }}</p>
         </div>
+      </div>
+      <div class="direita">
+        <button class="confirmar">Confirmar</button>
+      </div>
     </div>
+  </div>
+  <Footer />
 </template>
 
 <script setup>
+import { ref, onMounted, nextTick } from "vue";
+import { heightAdjust } from "../functions/functions";
+import { useProdutoStore } from "../stores/produtoEscolhido";
+import { doc, collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
+const escolhaComponente = ref(null);
+const data = ref([]);
+const produto = useProdutoStore();
+const dadosProduto = ref([]);
+const produtoStore = useProdutoStore();
+
+onMounted(async () => {
+  await nextTick();
+  data.value = (await produto).dadosProduto;
+  console.log(data.value);
+});
+
+onMounted(async () => {
+  let docSnapshot = await getDocs(collection(db, "produtos"));
+
+  if (docSnapshot) {
+    docSnapshot.forEach((produto) => {
+      dadosProduto.value.push({ ...produto.data(), id: produto.id });
+    });
+
+    console.log(dadosProduto.value);
+  } else {
+    console.log("Nenhum documento encontrado");
+  }
+});
 </script>
 
 <style scoped>
+.g-col-6 {
+  padding: 10px;
+  display: flex;
+  box-shadow: 0px 0px 5px #c7a995;
+}
+.conteudo-produto {
+  display: flex;
+  align-items: center;
+}
+.nomes {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.confirmar {
+  color: #fdfdfd;
+  background-color: #202020;
+  border: none;
+  padding: 10px 20px 10px 20px;
+  text-align: center;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.direita {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 10px; /* Ajuste a margem conforme necessário */
+}
 .titulo {
-    margin-top: 20px;
-    font-family: "Kaushan Script";
-    text-align: center;
-    font-size: 3rem;
+  margin-top: 20px;
+  font-family: "Kaushan Script";
+  text-align: center;
+  font-size: 3rem;
 }
-
 .produtos {
-    display: flex;
+  display: flex;
 }
-
 .produto {
-    display: flex;
-    border-top: 2.5px solid #ccc;
+  display: flex;
+  border-top: 2.5px solid #ccc;
 }
-
 .divisoria {
-    width: 100%;
+  width: 100%;
 }
-
 .quantidade {
-    display: flex;
+  display: flex;
 }
-
 .remover > button {
-    border: none;
-    outline: none;
-    background: transparent;
-    color: #ccc;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ccc;
 }
 </style>
