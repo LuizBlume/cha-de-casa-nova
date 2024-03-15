@@ -16,6 +16,7 @@
           <p>{{ produto.descricao }}</p>
         </div>
       </div>
+
       <div class="direita">
         <button class="confirmar">Confirmar</button>
       </div>
@@ -62,8 +63,14 @@ onMounted(async () => {
 .g-col-6 {
   padding: 10px;
   display: flex;
+  justify-content: space-between;
   box-shadow: 0px 0px 5px #c7a995;
 }
+
+.grid {
+  margin-top: 40px;
+}
+
 .conteudo-produto {
   display: flex;
   align-items: center;
@@ -92,7 +99,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 10px; /* Ajuste a margem conforme necessário */
+  margin-right: 15px;
 }
 .titulo {
   margin-top: 20px;
