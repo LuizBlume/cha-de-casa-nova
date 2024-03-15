@@ -7,6 +7,10 @@
     >
       <div class="card h-100">
         <img :src="produto.url" class="card-img-top" alt="..." />
+        <div class="status">
+            <p v-if="Number(produto.estoque) > 0" class="disponivel">Em estoque</p>
+            <p v-else class="esgotado">Esgotado</p>
+          </div>
         <div class="card-body">
           <h5 class="card-title">
             {{ produto.nome }}
@@ -21,26 +25,29 @@
               @click="produtoStore.dadosProduto = produto"
               to="/escolha"
               class="escolher"
-              >Escolher</router-link
+              >Ver</router-link
             >
           </button>
-          <button class="comprar escolher esg disp">Disponível</button>
         </div>
         <div class="card-footer">
             <div class="containerButton">
-            <button
-              class="comprar adicionarItens"
-              @click="incrementarQuantidade(produto)"
-            >
-              +
-            </button>
-            <p class="quantidade-cliente">{{ produto.quantidadeCliente }}</p>
-            <button
-              class="comprar removerItens"
-              @click="decrementarQuantidade(produto)"
-            >
-              -
-            </button>
+              <button
+                class="comprar adicionarItens"
+                @click="incrementarQuantidade(produto)"
+              >
+                +
+              </button>
+              <p class="quantidade-cliente">{{ produto.quantidadeCliente }}</p>
+              <button
+                class="comprar removerItens"
+                @click="decrementarQuantidade(produto)"
+              >
+                -
+              </button>
+          </div>
+
+          <div class="containerFinalizar">
+            <button class="buttonFinalizar">Escolher presente</button>
           </div>
         </div>
       </div>
@@ -67,10 +74,12 @@ onMounted(async () => {
         id: produto.id,
         quantidadeCliente: 1,
       });
+
     });
   } else {
     console.log("Nenhum documento encontrado");
   }
+  console.log(dadosProduto.value);
 });
 function decrementarQuantidade(produto) {
   if (produto.quantidadeCliente > 1) {
@@ -102,7 +111,22 @@ function incrementarQuantidade(produto) {
   align-items: center;
   background-color: #1a1a1a;
   border-radius: 5px;
+  width: 35%;
+}
+
+.containerFinalizar {
+  width: 40%;
+}
+
+.buttonFinalizar {
   width: 100%;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #1a1a1a;
+  color: orangered;
 }
 .quantidade-cliente {
   color: #fdfdfd;
@@ -110,12 +134,21 @@ function incrementarQuantidade(produto) {
   padding: 10px;
   margin: 0;
 }
-.disp {
-  background-color: #202020;
-  color: #1add1a !important;
-  text-align: center;
-  margin: 0;
+
+.disponivel {
+  color: #10a310;
 }
+
+.esgotado {
+  color: #e03333;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .row {
   padding: 10px 20px 10px 20px;
   background-color: #d5b6a2;
