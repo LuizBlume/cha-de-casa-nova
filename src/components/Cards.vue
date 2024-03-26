@@ -47,7 +47,7 @@
           </div>
 
           <div class="containerFinalizar">
-            <button class="buttonFinalizar">Escolher presente</button>
+            <button @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
           </div>
         </div>
       </div>
@@ -58,11 +58,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useProdutoStore } from "../stores/produtoEscolhido";
-import { doc, collection, getDocs } from "firebase/firestore";
+import { useUsuarioStore } from "../stores/usuario"
+import { doc, collection, getDocs, addDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const dadosProduto = ref([]);
 const produtoStore = useProdutoStore();
+const usuarioStore = useUsuarioStore();
 
 onMounted(async () => {
   let docSnapshot = await getDocs(collection(db, "produtos"));
@@ -88,6 +90,30 @@ function decrementarQuantidade(produto) {
 }
 function incrementarQuantidade(produto) {
   produto.quantidadeCliente += 1;
+}
+
+async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque, url, id, descricao) {
+  if (email == undefined) {
+    console.log("Você não pode adicionar um produto pois não está logado");
+  } else {
+    const addPresente = {email, nome: nomeProduto, quantidadeCliente, url, id};
+    const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
+    const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
+    console.log(atualizarEstoque)
+    console.log(atualizarProduto);
+
+    await addDoc(collection(db, 'carrinho'), addPresente).then((res) => {
+      console.log("Produto adicionado com sucesso!");
+    }).catch((error) => {
+      console.error("Erro ao adicionar um produto ao carrinho:", error);
+    })
+
+    await updateDoc(doc(db, 'produtos', id), atualizarProduto).then((res) => {
+      console.log("Produto atualizado com sucesso");
+    }).catch((error) => {
+      console.error("Erro ao atualizar o produto:", error);
+    })
+  }
 }
 </script>
 

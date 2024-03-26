@@ -31,7 +31,7 @@ onMounted(async () => {
         storeUsuario.trueUsuario = user;
         console.log(storeUsuario.trueUsuario);
     } else {
-        storeUsuario.usuario = false
+        storeUsuario.trueUsuario = false
         console.log("Nenhum usuário logado", user);
     }
   })

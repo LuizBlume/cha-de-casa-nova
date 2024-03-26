@@ -28,4 +28,4 @@ onMounted(async () => {
 
   await reloadFunction();
 })
-</script>../components/IconCarrinho.vue
+</script>
