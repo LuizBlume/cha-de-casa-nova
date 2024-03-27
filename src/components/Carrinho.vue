@@ -5,7 +5,7 @@
   />
   <div class="grid">
     <div
-      v-for="(produto, produtoIndex) in dadosProduto"
+      v-for="(produto, produtoIndex) in produtosEscolhidos"
       :key="produtoIndex"
       class="g-col-6"
     >
@@ -22,39 +22,29 @@
       </div>
     </div>
   </div>
-  <Footer />
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from "vue";
-import { heightAdjust } from "../functions/functions";
-import { useProdutoStore } from "../stores/produtoEscolhido";
+import { ref, onMounted } from "vue";
 import { doc, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-const escolhaComponente = ref(null);
-const data = ref([]);
-const produto = useProdutoStore();
-const dadosProduto = ref([]);
-const produtoStore = useProdutoStore();
+const produtosEscolhidos = ref([]);
 
 onMounted(async () => {
-  await nextTick();
-  data.value = (await produto).dadosProduto;
-  console.log(data.value);
-});
+  let snapShoot = await getDocs(collection(db, 'carrinho'));
 
-onMounted(async () => {
-  let docSnapshot = await getDocs(collection(db, "produtos"));
-
-  if (docSnapshot) {
-    docSnapshot.forEach((produto) => {
-      dadosProduto.value.push({ ...produto.data(), id: produto.id });
+  if (snapShoot) {
+    snapShoot.forEach((presente) => {
+      produtosEscolhidos.value.push({
+        ...presente.data(),
+        id: presente.id
+      });
     });
 
-    console.log(dadosProduto.value);
+    console.log(produtosEscolhidos.value);
   } else {
-    console.log("Nenhum documento encontrado");
+    console.log("Nenhum produto escolhido", typeof(produtosEscolhidos.value));
   }
 });
 </script>

@@ -1,22 +1,25 @@
 <template>
-  <div>
+  <div ref="alturaTotal" class="container-app">
     <RouterView />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router"
-import { ref, onMounted } from "vue"
+import { ref, onMounted, nextTick, vShow } from "vue"
+import { useHeightStore } from "./stores/height";
 import { useUsuarioStore } from "./stores/usuario"
 import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged} from "firebase/auth"
 import { doc, collection, getDocs } from "firebase/firestore"
 import { db, firebaseApp } from "./firebase"
 
-const adminData = ref([]);
 const storeUsuario = useUsuarioStore();
+const heightStore = useHeightStore();
+const alturaTotal = ref('');
 
 onMounted(async () => {
-  document.documentElement.style.height = '100vh'
+  document.documentElement.style.height = '100vh';
+  await nextTick();
   const auth = getAuth();
 
   setPersistence(auth, browserLocalPersistence).then(() => {
@@ -47,6 +50,14 @@ onMounted(async () => {
         console.log("Você não é um admin");
       }
     })
+  }
+
+  if (alturaTotal.value.offsetHeight <= document.documentElement.style.height) {
+    alturaTotal.value.style.height = '100vh';
+    console.log(alturaTotal.value.style.height);
+  } else {
+    alturaTotal.value.style.height = '100%';
+    console.log(alturaTotal.value.style.height);
   }
 })
 </script>

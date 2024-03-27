@@ -76,12 +76,12 @@ onMounted(async () => {
         id: produto.id,
         quantidadeCliente: 1,
       });
-
     });
+
+    console.log(dadosProduto.value);
   } else {
     console.log("Nenhum documento encontrado");
   }
-  console.log(dadosProduto.value);
 });
 function decrementarQuantidade(produto) {
   if (produto.quantidadeCliente > 1) {

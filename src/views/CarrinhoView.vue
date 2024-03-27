@@ -10,6 +10,7 @@
 import Header from '../components/Header.vue'
 import Carrinho from '../components/Carrinho.vue';
 import Footer from '../components/Footer.vue'
+import { useHeightStore } from '../stores/height';
 </script>
 
 <style scoped>
