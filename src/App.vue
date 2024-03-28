@@ -1,5 +1,5 @@
 <template>
-  <div ref="alturaTotal" class="container-app">
+  <div ref="alturaApp" class="container-app">
     <RouterView />
   </div>
 </template>
@@ -13,9 +13,9 @@ import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged} f
 import { doc, collection, getDocs } from "firebase/firestore"
 import { db, firebaseApp } from "./firebase"
 
+const alturaApp = ref(null);
 const storeUsuario = useUsuarioStore();
 const heightStore = useHeightStore();
-const alturaTotal = ref('');
 
 onMounted(async () => {
   document.documentElement.style.height = '100vh';
@@ -52,12 +52,12 @@ onMounted(async () => {
     })
   }
 
-  if (alturaTotal.value.offsetHeight <= document.documentElement.style.height) {
-    alturaTotal.value.style.height = '100vh';
-    console.log(alturaTotal.value.style.height);
+  if (alturaApp.value.offsetHeight <= document.documentElement.offsetHeight) {
+    alturaApp.value.style.height = '100vh';
+    console.log(alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
   } else {
-    alturaTotal.value.style.height = '100%';
-    console.log(alturaTotal.value.style.height);
+    alturaApp.value.style.height = '100%';
+    console.log(alturaApp.value.style.height, alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
   }
 })
 </script>
