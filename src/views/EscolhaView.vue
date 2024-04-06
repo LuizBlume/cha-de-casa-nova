@@ -16,6 +16,7 @@
         </h3>
       </div>
       <div class="qrcode">
+        <p class="email">Email: raissacamillyalvesdedeus@gmail.com</p>
           <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
       </div>
     </div>
@@ -47,6 +48,10 @@ onMounted(async () => {
   --bs-gutter-x: 0 !important;
   background-color: #d5b6a2;
   height: 100%;
+}
+.email {
+  margin-right: 10px;
+  font-size: 26px;
 }
 .escolher {
   color: #d5b6a2;
