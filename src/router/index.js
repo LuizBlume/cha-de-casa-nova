@@ -10,19 +10,28 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/Escolha',
+      path: '/escolha',
       name: 'Escolha',
-      component: () => import('../views/Escolha.vue')
+      component: () => import('../views/EscolhaView.vue')
     },
     {
-      path: '/Cadastro',
+      path: '/cadastro',
       name: 'Cadastro',
-      component: () => import('../views/Cadastro.vue')
+      component: () => import('../views/CadastroView.vue')
     },
     {
-      path: '/Login',
+      path: '/login',
       name: 'Login',
-      component: () => import('../views/Login.vue')
+      component: () => import('../views/LoginView.vue')
+    },
+    {
+      path: '/add-produto',
+      name: 'Add-produto',
+      component: () => import('../views/AdicionarProdutoView.vue')
+    },{
+      path: '/carrinho',
+      name: 'Carrinho',
+      component: () => import('../views/CarrinhoView.vue')
     },
     {
       path: '/Carrinho',

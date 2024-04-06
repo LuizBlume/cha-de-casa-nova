@@ -1,5 +1,5 @@
 <template>
-  <link
+    <link
     href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
     rel="stylesheet"
   />
@@ -14,39 +14,66 @@
       <div class="inferior">
         <h4>Não tem uma conta?</h4>
         <p>Crie uma aqui!</p>
-        <router-link to="/Cadastro" class="router">
+        <router-link to="/cadastro" class="router">
           <button class="btn btn-secondary btn-reg">Cadastrar-se</button>
         </router-link>
       </div>
     </div>
     <div class="col-8">
-      <h1 class="h1-header">Login</h1>
-      <div class="box">
-        <div class="inputBox">
-          <input type="text" name="nome" id="nome" class="inputUser" required />
-          <label for="nome" class="labelInput">Nome Completo</label>
+      <form @submit.prevent="logar">
+        <h1 class="h1-header">Login</h1>
+        <div class="box">
+          <div class="inputBox">
+            <input type="text" name="nome" id="nome" class="inputUser" v-model="email" required />
+              <label for="nome" class="labelInput">Email</label>
+          </div>
         </div>
-      </div>
-      <div class="box2">
-        <div class="inputBox">
-          <input
-            type="password"
-            name="senha"
-            id="senha"
-            class="inputUser"
-            required
-          />
-          <label for="senha" class="labelInput">Senha</label>
+        <div class="box2">
+          <div class="inputBox">
+            <input type="password" name="senha" id="senha" class="inputUser" v-model="senha" required />
+              <label for="senha" class="labelInput">Senha</label>
+          </div>
         </div>
+        <div class="botao-reg">
+              <button type="submit" class="btn btn-secondary btn-reg">Conectar-se</button>
+        </div>
+        <h2 v-if="showError" class="erroCredenciais">Email e/ou senha incorretos!</h2>
+        </form>
       </div>
-      <div class="botao-reg">
-        <router-link to="/" class="router">
-          <button class="btn btn-secondary btn-reg">Conectar-se</button>
-        </router-link>
-      </div>
-    </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue"
+import { useRouter } from "vue-router"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { useReloadStore } from "../stores/reload"
+import { firebaseApp } from "../firebase";
+
+const email = ref('');
+const senha = ref('');
+const router = useRouter();
+const reloadStore = useReloadStore();
+const showError = ref(false);
+
+async function logar() {
+  try {
+    const auth = getAuth();
+
+    await signInWithEmailAndPassword(auth, email.value, senha.value).then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        reloadStore.isReload = true;
+        router.push({ path: '/' });
+    })
+  } catch(error) {
+    showError.value = true
+    console.log(showError)
+    console.error("Erro ao logar o usuário:", error);
+  }
+}
+</script>
+
 <style scoped>
 .h1-header {
   color: #2c2c2c;
@@ -184,6 +211,12 @@ p {
   background-color: #a88b77;
   color: #2c2c2c;
 }
+
+.erroCredenciais {
+  color: #91674b;
+  margin-left: 210px;
+}
+
 @media (max-width: 320px) {
   .h1-header {
     font-size: 40px;

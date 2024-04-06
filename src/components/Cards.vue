@@ -1,257 +1,123 @@
 <template>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
+    <div
+      v-for="(produto, produtoIndex) in dadosProduto"
+      :key="produtoIndex"
+      class="col"
+    >
       <div class="card h-100">
-        <img src="../assets/images/copos.jpg" class="card-img-top" alt="..." />
+        <img :src="produto.url" class="card-img-top" alt="..." />
+        <div class="status">
+            <p v-if="Number(produto.estoque) > 0" class="disponivel">Em estoque</p>
+            <p v-else class="esgotado">Esgotado</p>
+          </div>
         <div class="card-body">
-          <h5 class="card-title">Jogo de copos</h5>
+          <h5 class="card-title">
+            {{ produto.nome }}
+          </h5>
           <p class="card-text">
-            Jogo de copos de vidro 6 peças 465ml Nadir
+            {{ produto.descricao }}
           </p>
         </div>
         <div class="card-footer">
           <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Disponível</router-link>
+            <router-link
+              @click="produtoStore.dadosProduto = produto"
+              to="/escolha"
+              class="escolher"
+              >Ver</router-link
+            >
           </button>
         </div>
         <div class="card-footer">
-          <p>lorem</p>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/pipoqueira.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Pipoqueira</h5>
-          <p class="card-text">
-            Pipoqueira antiaderente Tramontina
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/sanduicheira.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Sanduicheira</h5>
-          <p class="card-text">
-            Sanduicheira/Grill
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/liquidificador.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Liquidificador</h5>
-          <p class="card-text">
-            Liquidificador Philco preto com filtro - 12 velocidade 1200w
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/utensilios.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Kit 12 utensílios de cozinha</h5>
-          <p class="card-text">
-            Kit 12 utensílios de cozinha de silicone com cabo de madeira
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/assadeira.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Assadeira</h5>
-          <p class="card-text">
-            Conjunto 3 assadeiras antiaderente retangular
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/tacas.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Taças de sobremesa</h5>
-          <p class="card-text">
-            Jogo de taças de sobremesa
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/faqueiro.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Faqueiro</h5>
-          <p class="card-text">
-            Faqueiro Tramontina 24 peças - Preto
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/frigideira.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Frigideira</h5>
-          <p class="card-text">
-            Frigideira antiaderente preta com tampa Tramontina
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/airfryer.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Fritadeira</h5>
-          <p class="card-text">
-            Fritadeira sem óleo/Air Fry Philco 4,3L
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/batedeira.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Batedeira</h5>
-          <p class="card-text">
-            Batedeira Planetária de bolo
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/panela-pressao.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Panela de Pressão</h5>
-          <p class="card-text">
-            Panela de pressão grafite fechamento externo
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Indisponível</router-link>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card h-100">
-        <img src="../assets/images/ventilador.jpg" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h5 class="card-title">Ventilador</h5>
-          <p class="card-text">
-            Ventilador Arno 6 hélices
-          </p>
-        </div>
-        <div class="card-footer">
-          <button class="comprar">
-            <router-link to="/Escolha" class="escolher">Escolher</router-link>
-          </button>
-          <button class="comprar">
-            <router-link to="" class="escolher esg disp">Disponível</router-link>
-          </button>
+            <div class="containerButton">
+              <button
+                class="comprar adicionarItens"
+                @click="incrementarQuantidade(produto)"
+              >
+                +
+              </button>
+              <p class="quantidade-cliente">{{ produto.quantidadeCliente }}</p>
+              <button
+                class="comprar removerItens"
+                @click="decrementarQuantidade(produto)"
+              >
+                -
+              </button>
+          </div>
+
+          <div class="containerFinalizar">
+            <button @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import { useProdutoStore } from "../stores/produtoEscolhido";
+import { useUsuarioStore } from "../stores/usuario"
+import { doc, collection, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase";
+
+const dadosProduto = ref([]);
+const produtoStore = useProdutoStore();
+const usuarioStore = useUsuarioStore();
+
+onMounted(async () => {
+  let docSnapshot = await getDocs(collection(db, "produtos"));
+
+  if (docSnapshot) {
+    docSnapshot.forEach((produto) => {
+      dadosProduto.value.push({
+        ...produto.data(),
+        id: produto.id,
+        quantidadeCliente: 1,
+      });
+    });
+
+    console.log(dadosProduto.value);
+  } else {
+    console.log("Nenhum documento encontrado");
+  }
+});
+function decrementarQuantidade(produto) {
+  if (produto.quantidadeCliente > 1) {
+    produto.quantidadeCliente -= 1;
+  }
+}
+function incrementarQuantidade(produto) {
+  produto.quantidadeCliente += 1;
+}
+
+async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque, url, id, descricao) {
+  if (email == undefined) {
+    console.log("Você não pode adicionar um produto pois não está logado");
+  } else {
+    const addPresente = {email, nome: nomeProduto, quantidadeCliente, url, id};
+    const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
+    const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
+    console.log(atualizarEstoque)
+    console.log(atualizarProduto);
+
+    await addDoc(collection(db, 'carrinho'), addPresente).then((res) => {
+      console.log("Produto adicionado com sucesso!");
+    }).catch((error) => {
+      console.error("Erro ao adicionar um produto ao carrinho:", error);
+    })
+
+    await updateDoc(doc(db, 'produtos', id), atualizarProduto).then((res) => {
+      console.log("Produto atualizado com sucesso");
+    }).catch((error) => {
+      console.error("Erro ao atualizar o produto:", error);
+    })
+  }
+}
+</script>
+
+
 <style scoped>
 .esg {
   background-color: #202020;
@@ -259,17 +125,62 @@
   text-align: center;
   margin: 0;
 }
-.disp {
-  background-color: #202020;
-  color: #1add1a !important;
-  text-align: center;
+.removerItens {
+  color: #fdfdfd;
+}
+.adicionarItens {
+  color: #fdfdfd;
+}
+.containerButton {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+  width: 35%;
+}
+
+.containerFinalizar {
+  width: 40%;
+}
+
+.buttonFinalizar {
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #1a1a1a;
+  color: orangered;
+}
+.quantidade-cliente {
+  color: #fdfdfd;
+  font-size: 14px;
+  padding: 10px;
   margin: 0;
 }
+
+.disponivel {
+  color: #10a310;
+}
+
+.esgotado {
+  color: #e03333;
+}
+
+.status {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
 .row {
   padding: 10px 20px 10px 20px;
-  background-color: #D5B6A2;
+  background-color: #d5b6a2;
 }
-.g-4, .gx-4 {
+.g-4,
+.gx-4 {
   --bs-gutter-x: 0;
   --bs-gutter-y: 0;
 }
@@ -283,10 +194,10 @@
   text-align: center;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 5px;  
+  border-radius: 5px;
 }
 .escolher {
-  color: #D5B6A2;
+  color: #d5b6a2;
   text-decoration: none;
 }
 .card {
