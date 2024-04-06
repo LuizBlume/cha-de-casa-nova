@@ -35,14 +35,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { doc, collection, getDocs } from "firebase/firestore";
+import { ref, onMounted, nextTick } from "vue";
+import { useUsuarioStore } from "../stores/usuario";
+import { query, where, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
+const usuario = useUsuarioStore();
 const produtosEscolhidos = ref([]);
 
 onMounted(async () => {
-  let snapShoot = await getDocs(collection(db, 'carrinho'));
+  // Crie a consulta após o componente ter sido montado
+  let q = query(collection(db, 'carrinho'), where('email', "==", usuario.email));
+  let snapShoot = await getDocs(q);
 
   if (snapShoot) {
     snapShoot.forEach((presente) => {

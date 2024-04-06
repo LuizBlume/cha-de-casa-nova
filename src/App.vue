@@ -32,6 +32,7 @@ onMounted(async () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
         storeUsuario.trueUsuario = user;
+        storeUsuario.email = storeUsuario.trueUsuario.email;
         console.log(storeUsuario.trueUsuario);
     } else {
         storeUsuario.trueUsuario = false
