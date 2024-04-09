@@ -1,22 +1,25 @@
 <template>
-  <div>
+  <div ref="alturaApp" class="container-app">
     <RouterView />
   </div>
 </template>
 
 <script setup>
 import { RouterLink, RouterView } from "vue-router"
-import { ref, onMounted } from "vue"
+import { ref, onMounted, nextTick, vShow } from "vue"
+import { useHeightStore } from "./stores/height";
 import { useUsuarioStore } from "./stores/usuario"
 import { getAuth, setPersistence, browserLocalPersistence, onAuthStateChanged} from "firebase/auth"
 import { doc, collection, getDocs } from "firebase/firestore"
 import { db, firebaseApp } from "./firebase"
 
-const adminData = ref([]);
+const alturaApp = ref(null);
 const storeUsuario = useUsuarioStore();
+const heightStore = useHeightStore();
 
 onMounted(async () => {
-  document.documentElement.style.height = '100vh'
+  document.documentElement.style.height = '100vh';
+  await nextTick();
   const auth = getAuth();
 
   setPersistence(auth, browserLocalPersistence).then(() => {
@@ -29,9 +32,10 @@ onMounted(async () => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
         storeUsuario.trueUsuario = user;
+        storeUsuario.email = storeUsuario.trueUsuario.email;
         console.log(storeUsuario.trueUsuario);
     } else {
-        storeUsuario.usuario = false
+        storeUsuario.trueUsuario = false
         console.log("Nenhum usuário logado", user);
     }
   })
@@ -47,6 +51,14 @@ onMounted(async () => {
         console.log("Você não é um admin");
       }
     })
+  }
+
+  if (alturaApp.value.offsetHeight <= document.documentElement.offsetHeight) {
+    alturaApp.value.style.height = '100vh';
+    console.log(alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
+  } else {
+    alturaApp.value.style.height = '100%';
+    console.log(alturaApp.value.style.height, alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
   }
 })
 </script>

@@ -5,7 +5,7 @@
   />
   <div class="grid">
     <div
-      v-for="(produto, produtoIndex) in dadosProduto"
+      v-for="(produto, produtoIndex) in produtosEscolhidos"
       :key="produtoIndex"
       class="g-col-6"
     >
@@ -18,43 +18,47 @@
       </div>
 
       <div class="direita">
-        <button class="confirmar">Confirmar</button>
+        <button class="confirmar" title="Confirmar compra de presente">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2 comprarPresente" viewBox="0 0 16 16">
+          <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+          </svg>
+        </button>
+
+        <button class="remover" title="Remover presente do carrinho">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x removerPresente" viewBox="0 0 16 16">
+          <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
-  <Footer />
 </template>
 
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
-import { heightAdjust } from "../functions/functions";
-import { useProdutoStore } from "../stores/produtoEscolhido";
-import { doc, collection, getDocs } from "firebase/firestore";
+import { useUsuarioStore } from "../stores/usuario";
+import { query, where, collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 
-const escolhaComponente = ref(null);
-const data = ref([]);
-const produto = useProdutoStore();
-const dadosProduto = ref([]);
-const produtoStore = useProdutoStore();
+const usuario = useUsuarioStore();
+const produtosEscolhidos = ref([]);
 
 onMounted(async () => {
-  await nextTick();
-  data.value = (await produto).dadosProduto;
-  console.log(data.value);
-});
+  // Crie a consulta após o componente ter sido montado
+  let q = query(collection(db, 'carrinho'), where('email', "==", usuario.email));
+  let snapShoot = await getDocs(q);
 
-onMounted(async () => {
-  let docSnapshot = await getDocs(collection(db, "produtos"));
-
-  if (docSnapshot) {
-    docSnapshot.forEach((produto) => {
-      dadosProduto.value.push({ ...produto.data(), id: produto.id });
+  if (snapShoot) {
+    snapShoot.forEach((presente) => {
+      produtosEscolhidos.value.push({
+        ...presente.data(),
+        id: presente.id
+      });
     });
 
-    console.log(dadosProduto.value);
+    console.log(produtosEscolhidos.value);
   } else {
-    console.log("Nenhum documento encontrado");
+    console.log("Nenhum produto escolhido", typeof(produtosEscolhidos.value));
   }
 });
 </script>
@@ -82,24 +86,31 @@ onMounted(async () => {
   justify-content: flex-start;
   align-items: flex-start;
 }
-.confirmar {
-  color: #fdfdfd;
-  background-color: #202020;
-  border: none;
-  padding: 10px 20px 10px 20px;
-  text-align: center;
-  margin-top: 8px;
-  cursor: pointer;
-  border-radius: 5px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
 .direita {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   margin-right: 15px;
+  column-gap: 20px;
+}
+.confirmar, .remover {
+  color: #fdfdfd;
+  background-color: #202020;
+  border: none;
+  padding: 5px;
+  text-align: center;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.comprarPresente{
+  color: rgb(10, 179, 10);
+}
+.removerPresente {
+  color: red;
 }
 .titulo {
   margin-top: 20px;

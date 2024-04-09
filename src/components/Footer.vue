@@ -27,10 +27,9 @@ const props = defineProps({
 
 <style scoped>
 .footer {
-  margin-top: 20px;
   background-color: #bf6f4e;
   width: 100%;
-  height: 8vw;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
