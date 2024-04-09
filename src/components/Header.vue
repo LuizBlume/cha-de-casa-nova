@@ -130,7 +130,7 @@ gap: 8px;
 }
 
 .email {
-font-size: 1.2rem !important;
+font-size: 1.2rem;
 }
 
 .add > a {
@@ -414,6 +414,12 @@ bottom: 89px;
   .dropdown-item, .dropdown-item-logout {
     font-size: 22px;
   }
+  .add > a {
+    font-size: 1.1rem;
+  }
+  .email {
+    font-size: 0.9rem;
+  }
 }
 @media (min-width: 1241px) and (max-width: 1440px) {
   .h1-header {
@@ -444,6 +450,9 @@ bottom: 89px;
   }
   .dropdown-item, .dropdown-item-logout {
     font-size: 24px;
+  }
+  .add > a {
+    font-size: 1.3rem;
   }
   .email {
     font-size: 1rem!important;

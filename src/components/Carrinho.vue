@@ -24,7 +24,7 @@
           </svg>
         </button>
 
-        <button class="remover" title="Remover presente do carrinho">
+        <button @click="removerPresente(produto.id, produto.id_produto)" class="remover" title="Remover presente do carrinho">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x removerPresente" viewBox="0 0 16 16">
           <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
           </svg>
@@ -37,7 +37,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
 import { useUsuarioStore } from "../stores/usuario";
-import { query, where, collection, getDocs } from "firebase/firestore";
+import { query, where, collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const usuario = useUsuarioStore();
@@ -61,6 +61,25 @@ onMounted(async () => {
     console.log("Nenhum produto escolhido", typeof(produtosEscolhidos.value));
   }
 });
+
+async function removerPresente(id_presente, id_produto) {
+  let estoque_produto = ''
+  produtosEscolhidos.value.forEach((produto) => {
+    if (produto.id === id_presente) {
+      estoque_produto = produto.quantidadeCliente.toString()
+      console.log(estoque_produto, id_produto, id_presente)
+    }
+  })
+
+  await deleteDoc(doc(db, 'carrinho', id_presente))
+
+  await updateDoc(doc(db, 'produtos', id_produto), {
+    estoque: estoque_produto
+  }).then(() => {
+    console.log("Estoque atualizado");
+    location.reload();
+  })
+}
 </script>
 
 <style scoped>

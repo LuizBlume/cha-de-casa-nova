@@ -89,30 +89,32 @@ function decrementarQuantidade(produto) {
   }
 }
 function incrementarQuantidade(produto) {
-  produto.quantidadeCliente += 1;
+  if ((produto.estoque - produto.quantidadeCliente) > 0) {
+    produto.quantidadeCliente += 1;
+  } else {
+    console.log("Este produto não tem estoque suficiente para adicionar mais um");
+  }
 }
 
 async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque, url, id, descricao) {
   if (email == undefined) {
     console.log("Você não pode adicionar um produto pois não está logado");
   } else {
-    const addPresente = {email, nome: nomeProduto, quantidadeCliente, url, id};
-    const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
-    const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
-    console.log(atualizarEstoque)
-    console.log(atualizarProduto);
+    if (Number(estoque) > 0 ) {
+      const addPresente = {email, nome: nomeProduto, descricao, quantidadeCliente, url, id_produto: id};
+      const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
+      const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
 
-    await addDoc(collection(db, 'carrinho'), addPresente).then((res) => {
-      console.log("Produto adicionado com sucesso!");
-    }).catch((error) => {
-      console.error("Erro ao adicionar um produto ao carrinho:", error);
-    })
+      await addDoc(collection(db, 'carrinho'), addPresente).catch((error) => {
+        console.error("Erro ao adicionar um produto ao carrinho:", error);
+      })
 
-    await updateDoc(doc(db, 'produtos', id), atualizarProduto).then((res) => {
-      console.log("Produto atualizado com sucesso");
-    }).catch((error) => {
-      console.error("Erro ao atualizar o produto:", error);
-    })
+      await updateDoc(doc(db, 'produtos', id), atualizarProduto).catch((error) => {
+        console.error("Erro ao atualizar o produto:", error);
+      })
+    } else {
+      console.log("Não é possível adicionar este produto, pois ele está sem estoque");
+    }
   }
 }
 </script>
