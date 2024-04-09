@@ -4,7 +4,7 @@
     rel="stylesheet"
   />
   <div class="row">
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <router-link to="/" class="router">
         <h1 class="h1-header">Chá de Casa Nova</h1>
       </router-link>
@@ -19,7 +19,7 @@
         </router-link>
       </div>
     </div>
-    <div class="col-8">
+    <div class="col-12 col-md-8">
       <form @submit.prevent="cadastrar">
         <h1 class="h1-header">Cadastro</h1>
         <div class="box">
@@ -124,13 +124,13 @@ async function cadastrar() {
 .h3-r {
   margin: -30px 0 0 180px;
 }
-.col-4 {
+.col-12 {
   background-color: #d5b6a2;
   height: 100vh;
   box-shadow: 1px 0px 12px 3px rgba(75, 75, 75, 0.75);
   z-index: 1;
 }
-.col-8 {
+.col-12 {
   background-color: #d5b6a2;
   height: 100vh;
   padding: 0;
@@ -228,11 +228,15 @@ p {
   color: #2c2c2c;
 }
 @media (max-width: 425px) {
-  .col-4 {
-    display: block;
-    height: 100vh;
+  .col-12 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    box-shadow: none;
   }
   .h1-header {
+    margin-top: 20px;
     font-size: 40px;
   }
   .h3-v {
@@ -255,7 +259,8 @@ p {
   }
   .col-8 {
     display: block;
-    height: 100vh;
+    height: 100%;
+    width: 100vw;
   }
   h4 {
     font-size: 20px;
@@ -277,7 +282,7 @@ p {
   .botao-reg {
     display: flex;
     margin: 0;
-    top: 90px;
+    top: 0px;
   }
   .inputBox {
     width: 90%;
@@ -292,6 +297,48 @@ p {
   .box,
   .box2 {
     top: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .h1-header {
+    font-size: 40px;
+  }
+  .h3-v,
+  .h3-i,
+  .h3-r {
+    font-size: 35px;
+    margin: 10px auto;
+  }
+  h4,
+  p {
+    font-size: 26px;
+    top: 40px;
+  }
+  .btn {
+    font-size: 25px;
+    width: 200px;
+    height: 50px;
+    margin-top: 70px;
+  }
+  .inputUser {
+    font-size: 25px;
+  }
+  .labelInput {
+    font-size: 20px;
+  }
+  .inferior {
+    margin-top: 0;
+    top: 0;
+  }
+  .box,
+  .box2 {
+    top: 20px;
+  }
+  .box2 {
+    top: 150px;
+  }
+  .botao-reg {
+    top: 200px;
   }
 }
 </style>
