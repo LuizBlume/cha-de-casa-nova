@@ -5,7 +5,7 @@
       :key="produtoIndex"
       class="col"
     >
-      <div class="card h-100">
+      <div :class="Number(produto.estoque) > 0 ? 'card h-100' : 'card-esgotado h-100' ">
         <img :src="produto.url" class="card-img-top" alt="..." />
         <div class="status">
             <p v-if="Number(produto.estoque) > 0" class="disponivel">Em estoque</p>
@@ -47,7 +47,9 @@
           </div>
 
           <div class="containerFinalizar">
-            <button @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
+            <button v-if="Number(produto.estoque) > 0" @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
+
+            <button v-else class="buttonSemEstoque">Escolher presente</button>
           </div>
         </div>
       </div>
@@ -100,7 +102,7 @@ async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque,
   if (email == undefined) {
     console.log("Você não pode adicionar um produto pois não está logado");
   } else {
-    if (Number(estoque) > 0 ) {
+    if (Number(estoque) > 0) {
       const addPresente = {email, nome: nomeProduto, descricao, quantidadeCliente, url, id_produto: id};
       const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
       const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
@@ -156,6 +158,17 @@ async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque,
   background: #1a1a1a;
   color: orangered;
 }
+.buttonSemEstoque {
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #1a1a1a;
+  color: #6b6664;
+  cursor: default;
+}
 .quantidade-cliente {
   color: #fdfdfd;
   font-size: 14px;
@@ -205,6 +218,39 @@ async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque,
 .card {
   margin: 10px;
   background-color: #d1ac94;
+}
+.card-esgotado {
+  margin: 10px;
+  background-color: #c3c3c3;
+  --bs-card-spacer-y: 1rem;
+  --bs-card-spacer-x: 1rem;
+  --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-title-color: ;
+  --bs-card-subtitle-color: ;
+  --bs-card-border-width: var(--bs-border-width);
+  --bs-card-border-color: var(--bs-border-color-translucent);
+  --bs-card-border-radius: var(--bs-border-radius);
+  --bs-card-box-shadow: ;
+  --bs-card-inner-border-radius: calc(var(--bs-border-radius) -(var(--bs-border-width)));
+  --bs-card-cap-padding-y: 0.5rem;
+  --bs-card-cap-padding-x: 1rem;
+  --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
+  --bs-card-bg: var(--bs-body-bg);
+  --bs-card-img-overlay-padding: 1rem;
+  --bs-card-group-margin: 0.75rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: var(--bs-card-height);
+    color: var(--bs-body-color);
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    border-radius: var(--bs-card-border-radius);
 }
 .card-body {
   display: flex !important;
