@@ -595,5 +595,3 @@ bottom: 89px;
   }
 }
 </style>
-<script setup>
-</script>
