@@ -151,6 +151,7 @@ async function removerPresente(id_presente, id_produto) {
 </script>
 
 <style scoped>
+@import url('../assets/css/responsividade/Carrinho/carrinho.css');
 .g-col-6 {
   padding: 10px;
   display: flex;
@@ -192,8 +193,7 @@ async function removerPresente(id_presente, id_produto) {
   margin: 0;
 }
 .grid {
-  margin-top: 40px;
-  --bs-gutter-x: 0 !important;
+  margin-top: 50px;
 }
 .grid-container[data-v-f4fe258e] {
     display: grid;
@@ -221,7 +221,6 @@ async function removerPresente(id_presente, id_produto) {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  margin-right: 15px;
   column-gap: 20px;
 }
 .confirmar,
@@ -268,47 +267,5 @@ async function removerPresente(id_presente, id_produto) {
   outline: none;
   background: transparent;
   color: #ccc;
-}
-@media (max-width: 425px) {
-  .grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    height: 100% !important;
-  }
-  .g-col-6 {
-    width: 100vw;
-    height: 50vh !important;
-    flex-wrap: wrap;
-  }
-  .conteudo-produto {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .nomes {
-    width: 100%;
-    margin-top: 10px;
-  }
-  .direita {
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-  .buttons {
-    justify-content: center;
-  }
-  .quantidade {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .remover > button {
-    margin-top: 8px; 
-  }
-  .direita > p {
-    margin-right: 7px;
-  }
 }
 </style>

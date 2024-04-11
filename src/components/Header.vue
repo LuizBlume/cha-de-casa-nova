@@ -1,8 +1,8 @@
 <template>
-  <div ref="headerElement">
+  <div class="container-header" ref="headerElement">
       <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
       <header>
-        <router-link to="/">
+        <router-link to="/" class="link-header">
           <h1 class="h1-header">Chá de Casa Nova</h1>
           <h3 class="h3-v">Victor</h3>
           <h3 class="h3-i">&</h3>
@@ -65,7 +65,10 @@ a {
 text-decoration: none;
 color: #2c2c2c;
 }
-
+.link-header {
+  text-decoration: none;
+  height: 100px !important;
+}
 header {
 background-color: #bf6f4e;
 width: 100%;
@@ -397,6 +400,12 @@ bottom: 89px;
   .subheader {
     height: 6vw;
   }
+  .container-header {
+    max-height: 220px;
+  }
+  .link-header {
+    height: 100px;
+  }
   .dropdown, .btn {
     width: 200px;
     font-size: 18px;
@@ -445,6 +454,7 @@ bottom: 89px;
     position: relative;
     right: 10px;
   }
+
   .dropdown-menu.show {
     width: 240px;
   }
