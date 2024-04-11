@@ -8,9 +8,11 @@
       <div class="card h-100">
         <img :src="produto.url" class="card-img-top" alt="..." />
         <div class="status">
-            <p v-if="Number(produto.estoque) > 0" class="disponivel">Em estoque</p>
-            <p v-else class="esgotado">Esgotado</p>
-          </div>
+          <p v-if="Number(produto.estoque) > 0" class="disponivel">
+            Em estoque
+          </p>
+          <p v-else class="esgotado">Esgotado</p>
+        </div>
         <div class="card-body">
           <h5 class="card-title">
             {{ produto.nome }}
@@ -30,24 +32,39 @@
           </button>
         </div>
         <div class="card-footer">
-            <div class="containerButton">
-              <button
-                class="comprar adicionarItens"
-                @click="incrementarQuantidade(produto)"
-              >
-                +
-              </button>
-              <p class="quantidade-cliente">{{ produto.quantidadeCliente }}</p>
-              <button
-                class="comprar removerItens"
-                @click="decrementarQuantidade(produto)"
-              >
-                -
-              </button>
+          <div class="containerButton">
+            <button
+              class="comprar adicionarItens"
+              @click="incrementarQuantidade(produto)"
+            >
+              +
+            </button>
+            <p class="quantidade-cliente">{{ produto.quantidadeCliente }}</p>
+            <button
+              class="comprar removerItens"
+              @click="decrementarQuantidade(produto)"
+            >
+              -
+            </button>
           </div>
 
           <div class="containerFinalizar">
-            <button @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
+            <button
+              @click="
+                adicionarCarrinho(
+                  usuarioStore.trueUsuario.email,
+                  produto.nome,
+                  produto.quantidadeCliente,
+                  produto.estoque,
+                  produto.url,
+                  produto.id,
+                  produto.descricao
+                )
+              "
+              class="buttonFinalizar"
+            >
+              Escolher presente
+            </button>
           </div>
         </div>
       </div>
@@ -58,8 +75,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useProdutoStore } from "../stores/produtoEscolhido";
-import { useUsuarioStore } from "../stores/usuario"
-import { doc, collection, getDocs, addDoc, updateDoc } from "firebase/firestore";
+import { useUsuarioStore } from "../stores/usuario";
+import {
+  doc,
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const dadosProduto = ref([]);
@@ -89,31 +112,57 @@ function decrementarQuantidade(produto) {
   }
 }
 function incrementarQuantidade(produto) {
-  if ((produto.estoque - produto.quantidadeCliente) > 0) {
+  if (produto.estoque - produto.quantidadeCliente > 0) {
     produto.quantidadeCliente += 1;
   } else {
-    console.log("Este produto não tem estoque suficiente para adicionar mais um");
+    console.log(
+      "Este produto não tem estoque suficiente para adicionar mais um"
+    );
   }
 }
 
-async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque, url, id, descricao) {
+async function adicionarCarrinho(
+  email,
+  nomeProduto,
+  quantidadeCliente,
+  estoque,
+  url,
+  id,
+  descricao
+) {
   if (email == undefined) {
     console.log("Você não pode adicionar um produto pois não está logado");
   } else {
-    if (Number(estoque) > 0 ) {
-      const addPresente = {email, nome: nomeProduto, descricao, quantidadeCliente, url, id_produto: id};
+    if (Number(estoque) > 0) {
+      const addPresente = {
+        email,
+        nome: nomeProduto,
+        descricao,
+        quantidadeCliente,
+        url,
+        id_produto: id,
+      };
       const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
-      const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
+      const atualizarProduto = {
+        descricao,
+        estoque: atualizarEstoque,
+        nome: nomeProduto,
+        url,
+      };
 
-      await addDoc(collection(db, 'carrinho'), addPresente).catch((error) => {
+      await addDoc(collection(db, "carrinho"), addPresente).catch((error) => {
         console.error("Erro ao adicionar um produto ao carrinho:", error);
-      })
+      });
 
-      await updateDoc(doc(db, 'produtos', id), atualizarProduto).catch((error) => {
-        console.error("Erro ao atualizar o produto:", error);
-      })
+      await updateDoc(doc(db, "produtos", id), atualizarProduto).catch(
+        (error) => {
+          console.error("Erro ao atualizar o produto:", error);
+        }
+      );
     } else {
-      console.log("Não é possível adicionar este produto, pois ele está sem estoque");
+      console.log(
+        "Não é possível adicionar este produto, pois ele está sem estoque"
+      );
     }
   }
 }
@@ -239,6 +288,155 @@ async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque,
   .card-img-top {
     min-height: 30vw;
     max-height: 30vw;
+  }
+}
+@media screen and (min-width: 320px) and (max-width: 424px) {
+  .row {
+    flex-direction: column;
+    padding: 5px;
+  }
+  .col {
+    margin: 5px 0;
+  }
+  .card {
+    margin: 5px 0;
+  }
+  .card-img-top {
+    min-height: 100vw;
+    max-height: 100vw;
+  }
+  .card-body {
+    align-items: center !important;
+    text-align: center;
+  }
+  .status {
+    top: 5px;
+    left: 5px;
+  }
+  .buttonFinalizar {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+  .quantidade-cliente {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .containerButton {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 425px) and (max-width: 560px) {
+  .row {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .col {
+    margin: 5px 0;
+  }
+  .card {
+    margin: 5px 0;
+  }
+  .card-img-top {
+    min-height: 100vw;
+    max-height: 100vw;
+  }
+  .card-body {
+    align-items: center !important;
+    text-align: center;
+  }
+  .status {
+    top: 5px;
+    left: 5px;
+  }
+  .buttonFinalizar {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+  .quantidade-cliente {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .containerButton {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 561px) and (max-width: 767px) {
+  .row {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .col {
+    margin: 5px 0;
+  }
+  .card {
+    margin: 5px 0;
+  }
+  .card-img-top {
+    min-height: 100vw;
+    max-height: 100vw;
+  }
+  .card-body {
+    align-items: center !important;
+    text-align: center;
+  }
+  .status {
+    top: 5px;
+    left: 5px;
+  }
+  .buttonFinalizar {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+  .quantidade-cliente {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .containerButton {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .row {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .col {
+    flex-basis: calc(33.33% - 20px);
+    margin: 5px 0;
+  }
+  .card {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .card-footer {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-wrap: wrap;
+    padding: 5px;
+  }
+  .containerButton,
+  .containerFinalizar {
+    width: 45%; /* ou ajuste conforme desejado */
+    margin-top: 5px; /* ou ajuste conforme desejado */
+  }
+  .buttonFinalizar {
+    font-size: 0.8rem;
+    padding: 8px 16px;
+  }
+  .containerButton {
+    width: 50%;
+  }
+  .containerButton > .comprar {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .quantidade-cliente {
+    font-size: 12px;
+    padding: 5px;
   }
 }
 </style>
