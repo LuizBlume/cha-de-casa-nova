@@ -309,7 +309,6 @@ bottom: 89px;
     height: 8vw;
   }
   .dropdown, .btn {
-    top: 15px;
     width: 173px;
     font-size: 14px;
     height: 25px;
