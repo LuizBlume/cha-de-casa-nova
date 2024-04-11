@@ -5,9 +5,7 @@
       <div class="col-sm-4">
         <h3>{{ data.nome }}</h3>
         <img :src="data.url" alt="Jogo de Copos Nadir 465ml" width="350" height="350" />
-        <button class="comprar">
-          <router-link to="/Escolha" class="escolher">Confirmar</router-link>
-        </button>
+        <button @click="adicionarPresenteCarrinho" v-if="Number(data.estoque) > 0" class="comprar">Confirmar</button>
       </div>
       <div class="col-sm-8">
         <h3 class="h3-escolha">
@@ -28,18 +26,25 @@
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import { ref, onMounted, nextTick } from "vue"
-import { heightAdjust } from "../functions/functions"
+import { collection, addDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase"
 import { useProdutoStore } from "../stores/produtoEscolhido"
+import { useUsuarioStore } from "../stores/usuario"
 
 const escolhaComponente = ref(null);
 const data = ref([]);
 const produto = useProdutoStore();
+const usuario = useUsuarioStore();
 
 onMounted(async () => {
   await nextTick();
   data.value = (await produto).dadosProduto;
   console.log(data.value);
 })
+
+async function adicionarPresenteCarrinho() {
+  const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, quantidadeCliente: data.value.quantidadeCliente, url: data.value.url, id_produto: data.value.id};
+}
 </script>
 
 <style scoped>
@@ -59,6 +64,7 @@ onMounted(async () => {
 }
 .comprar {
   background-color: #202020;
+  color: #FDFDFD;
   border: none;
   padding: 10px 20px 10px 20px;
   text-align: center;
