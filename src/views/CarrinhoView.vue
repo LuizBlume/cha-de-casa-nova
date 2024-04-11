@@ -18,10 +18,11 @@ const alturaTotal = ref(null);
 onMounted(async () => {
     await nextTick()
 
+    console.log(alturaTotal.value.offsetHeight)
     if (alturaTotal.value.offsetHeight <= document.documentElement.offsetHeight) {
-    alturaTotal.value.style.height = '100vh';
-  } else {
-    alturaTotal.value.style.height = '100%';
+      alturaTotal.value.style.height = 'auto';
+    } else {
+      alturaTotal.value.style.height = 'auto';
   }
 })
 </script>
@@ -33,7 +34,8 @@ onMounted(async () => {
     "header"
     "main"
     "footer";
-    grid-template-rows: 2fr 5fr 1fr;
+    /* grid-template-rows: 2fr 5fr 1fr; */
+    grid-template-rows: 1fr 5fr 0.5fr;
     background-color: #D5B6A2;
 }
 </style>
