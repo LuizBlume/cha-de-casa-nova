@@ -6,3 +6,6 @@
 .background {
   background-color: #D5B6A2;
 }
+.container-app {
+  height: 100vh;
+}

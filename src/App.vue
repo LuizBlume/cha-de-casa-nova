@@ -64,4 +64,8 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.container-app {
+  --bs-gutter-x: 0 !important;
+  height: 100vh;
+}
 </style>

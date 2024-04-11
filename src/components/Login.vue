@@ -257,7 +257,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
     box-shadow: none;
   }
   .h1-header {
