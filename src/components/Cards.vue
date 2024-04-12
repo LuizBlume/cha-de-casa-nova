@@ -103,7 +103,7 @@ async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque,
     console.log("Você não pode adicionar um produto pois não está logado");
   } else {
     if (Number(estoque) > 0) {
-      const addPresente = {email, nome: nomeProduto, descricao, quantidadeCliente, url, id_produto: id};
+      const addPresente = {email, nome: nomeProduto, descricao, estoque, quantidadeCliente, url, id_produto: id};
       const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
       const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
 

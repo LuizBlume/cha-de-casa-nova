@@ -93,23 +93,24 @@
 <script setup>
 import { ref, onMounted, nextTick } from "vue";
 import { useUsuarioStore } from "../stores/usuario";
+import { useQuantidadeProdutosStore } from "../stores/quantidadeProdutos";
 import { query, where, collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 const usuario = useUsuarioStore();
 const produtosEscolhidos = ref([]);
-const presenteResponsivo = ref(false)
+const quantidadeProdutos = useQuantidadeProdutosStore();
+const presenteResponsivo = ref(false);
 
 onMounted(async () => {
-  if (document.documentElement.offsetHeight <= 1023) {
+  await nextTick()
+
+  if (document.documentElement.offsetWidth <= 1023) {
     presenteResponsivo.value = true
     console.log(presenteResponsivo.value)
   }
   // Crie a consulta após o componente ter sido montado
-  let q = query(
-    collection(db, "carrinho"),
-    where("email", "==", usuario.email)
-  );
+  let q = query(collection(db, "carrinho"), where("email", "==", usuario.email));
   let snapShoot = await getDocs(q);
 
   if (snapShoot) {
@@ -124,7 +125,9 @@ onMounted(async () => {
   } else {
     console.log("Nenhum produto escolhido", typeof produtosEscolhidos.value);
   }
+  quantidadeProdutos.quantidadeProdutos = produtosEscolhidos.value.length;
 });
+
 
 async function removerPresente(id_presente, id_produto) {
   let estoque_produto = "";
