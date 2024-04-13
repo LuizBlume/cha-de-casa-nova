@@ -5,7 +5,7 @@
       :key="produtoIndex"
       class="col"
     >
-      <div class="card h-100">
+      <div :class="Number(produto.estoque) > 0 ? 'card h-100' : 'card-esgotado h-100' ">
         <img :src="produto.url" class="card-img-top" alt="..." />
         <div class="status">
           <p v-if="Number(produto.estoque) > 0" class="disponivel">
@@ -49,22 +49,9 @@
           </div>
 
           <div class="containerFinalizar">
-            <button
-              @click="
-                adicionarCarrinho(
-                  usuarioStore.trueUsuario.email,
-                  produto.nome,
-                  produto.quantidadeCliente,
-                  produto.estoque,
-                  produto.url,
-                  produto.id,
-                  produto.descricao
-                )
-              "
-              class="buttonFinalizar"
-            >
-              Escolher presente
-            </button>
+            <button v-if="Number(produto.estoque) > 0" @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto)" class="buttonFinalizar">Escolher presente</button>
+
+            <button v-else class="buttonSemEstoque">Escolher presente</button>
           </div>
         </div>
       </div>
@@ -106,63 +93,46 @@ onMounted(async () => {
     console.log("Nenhum documento encontrado");
   }
 });
+function incrementarQuantidade(produto) {
+  if (produto.estoque - produto.quantidadeCliente > 0) {
+    produto.quantidadeCliente += 1;
+  } else {
+    if (produto.quantidadeCliente === 1) {
+      alert("Desculpe-me, mas este produto só pode ser comprado 1 vez!");
+    } else {
+      alert(`Desculpe-me, mas este produto só pode ser comprado ${produto.quantidadeCliente} vezes`); 
+    }
+  }
+}
 function decrementarQuantidade(produto) {
   if (produto.quantidadeCliente > 1) {
     produto.quantidadeCliente -= 1;
   }
 }
-function incrementarQuantidade(produto) {
-  if (produto.estoque - produto.quantidadeCliente > 0) {
-    produto.quantidadeCliente += 1;
-  } else {
-    console.log(
-      "Este produto não tem estoque suficiente para adicionar mais um"
-    );
-  }
-}
 
-async function adicionarCarrinho(
-  email,
-  nomeProduto,
-  quantidadeCliente,
-  estoque,
-  url,
-  id,
-  descricao
-) {
+async function adicionarCarrinho(email, produto) {
   if (email == undefined) {
-    console.log("Você não pode adicionar um produto pois não está logado");
+    alert("Você não pode adicionar um produto pois não está logado");
   } else {
-    if (Number(estoque) > 0) {
-      const addPresente = {
-        email,
-        nome: nomeProduto,
-        descricao,
-        quantidadeCliente,
-        url,
-        id_produto: id,
-      };
-      const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
-      const atualizarProduto = {
-        descricao,
-        estoque: atualizarEstoque,
-        nome: nomeProduto,
-        url,
-      };
+    let adicionarCarrinho = confirm("Você tem certeza de que deseja adicionar este presente ao seu carrinho? Escolha a opção 'OK' (em azul) se você quiser adicionar ao carrinho, ou a opção 'Cancelar' (em cinza) caso não queira adicionar ao carrinho!");
+    if (adicionarCarrinho) {
+      const addPresente = {email, nome: produto.nome, descricao: produto.descricao, estoque: produto.estoque, quantidadeCliente: produto.quantidadeCliente, confirmado: false, url: produto.url, id_produto: produto.id};
+      const atualizarEstoque = (Number(produto.estoque) - produto.quantidadeCliente).toString();
+      const atualizarProduto = {descricao: produto.descricao, estoque: atualizarEstoque, nome: produto.nome, url: produto.url};
 
-      await addDoc(collection(db, "carrinho"), addPresente).catch((error) => {
+      await addDoc(collection(db, 'carrinho'), addPresente).then(() => {
+        produto.estoque = atualizarEstoque;
+        alert("Presente adicionado ao carrinho com sucesso!")
+      }).catch((error) => {
         console.error("Erro ao adicionar um produto ao carrinho:", error);
-      });
+        alert("Erro ao adicionar o presente ao carrinho! Por favor, verifique sua conexão e tente novamente.");
+      })
 
-      await updateDoc(doc(db, "produtos", id), atualizarProduto).catch(
-        (error) => {
-          console.error("Erro ao atualizar o produto:", error);
-        }
-      );
+      await updateDoc(doc(db, 'produtos', produto.id), atualizarProduto).catch((error) => {
+        console.error("Erro ao atualizar o produto:", error);
+      })
     } else {
-      console.log(
-        "Não é possível adicionar este produto, pois ele está sem estoque"
-      );
+      alert("Produto não adicionado ao carrinho!");
     }
   }
 }
@@ -204,6 +174,17 @@ async function adicionarCarrinho(
   font-size: 1rem;
   background: #1a1a1a;
   color: orangered;
+}
+.buttonSemEstoque {
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #1a1a1a;
+  color: #6b6664;
+  cursor: default;
 }
 .quantidade-cliente {
   color: #fdfdfd;
@@ -254,6 +235,39 @@ async function adicionarCarrinho(
 .card {
   margin: 10px;
   background-color: #d1ac94;
+}
+.card-esgotado {
+  margin: 10px;
+  background-color: #c3c3c3;
+  --bs-card-spacer-y: 1rem;
+  --bs-card-spacer-x: 1rem;
+  --bs-card-title-spacer-y: 0.5rem;
+  --bs-card-title-color: ;
+  --bs-card-subtitle-color: ;
+  --bs-card-border-width: var(--bs-border-width);
+  --bs-card-border-color: var(--bs-border-color-translucent);
+  --bs-card-border-radius: var(--bs-border-radius);
+  --bs-card-box-shadow: ;
+  --bs-card-inner-border-radius: calc(var(--bs-border-radius) -(var(--bs-border-width)));
+  --bs-card-cap-padding-y: 0.5rem;
+  --bs-card-cap-padding-x: 1rem;
+  --bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
+  --bs-card-cap-color: ;
+  --bs-card-height: ;
+  --bs-card-color: ;
+  --bs-card-bg: var(--bs-body-bg);
+  --bs-card-img-overlay-padding: 1rem;
+  --bs-card-group-margin: 0.75rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: var(--bs-card-height);
+    color: var(--bs-body-color);
+    word-wrap: break-word;
+    background-clip: border-box;
+    border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+    border-radius: var(--bs-card-border-radius);
 }
 .card-body {
   display: flex !important;

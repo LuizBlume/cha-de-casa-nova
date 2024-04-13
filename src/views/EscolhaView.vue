@@ -14,6 +14,8 @@
         <button class="comprar">
           <router-link to="/Escolha" class="escolher">Confirmar</router-link>
         </button>
+        <img :src="data.url" alt="Jogo de Copos Nadir 465ml" width="350" height="350" />
+        <button @click="adicionarPresenteCarrinho" v-if="Number(data.estoque) > 0" class="comprar">Adicionar ao carrinho (1 quantidade)</button>
       </div>
       <div class="col-sm-8">
         <h3 class="h3-escolha">
@@ -25,6 +27,17 @@
       <div class="qrcode">
         <p class="email">Email: raissacamillyalvesdedeus@gmail.com</p>
         <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
+      <div class="container-escolha-qr">
+        <div class="col-sm-8">
+          <h3 class="h3-escolha">
+            Temos a opção de você comprar o presente em uma loja de sua preferência
+            e levar no dia, ou se achar melhor pode realizar um PIX no QRcode abaixo
+          </h3>
+        </div>
+        <div class="qrcode">
+          <p class="email">Email: raissacamillyalvesdedeus@gmail.com</p>
+            <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
+        </div>
       </div>
     </div>
     <Footer />
@@ -37,6 +50,11 @@ import Footer from "../components/Footer.vue";
 import { ref, onMounted, nextTick } from "vue";
 import { heightAdjust } from "../functions/functions";
 import { useProdutoStore } from "../stores/produtoEscolhido";
+import { ref, onMounted, nextTick } from "vue"
+import { collection, addDoc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase"
+import { useProdutoStore } from "../stores/produtoEscolhido"
+import { useUsuarioStore } from "../stores/usuario"
 
 const escolhaComponente = ref(null);
 const data = ref([]);
@@ -47,6 +65,13 @@ onMounted(async () => {
   data.value = (await produto).dadosProduto;
   console.log(data.value);
 });
+})
+
+async function adicionarPresenteCarrinho() {
+  const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, estoque: data.value.estoque, quantidadeCliente: data.value.quantidadeCliente, confirmado: false, url: data.value.url, id_produto: data.value.id};
+
+  console.log(presente)
+}
 </script>
 
 <style scoped>
@@ -91,19 +116,6 @@ onMounted(async () => {
 }
 .h3-escolha {
   width: 450px;
-  display: flex;
-  justify-content: center !important;
-  align-items: center !important;
-}
-.col-sm-8 {
-  background-color: #d5b6a2;
-  height: 100%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
 }
 @media screen and (min-width: 320px) and (max-width: 424px) {
   .row {

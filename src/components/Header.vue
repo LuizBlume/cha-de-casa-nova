@@ -209,6 +209,7 @@ bottom: 89px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 15px;
   }
 }
 @media (min-width: 321px) and (max-width: 375px) {
@@ -235,6 +236,7 @@ bottom: 89px;
     align-items: center;
     position: relative;
     right: 22px;
+    margin-top: 5px;
   }
   .dropdown-menu.show {
     position: absolute!important;
@@ -277,7 +279,7 @@ bottom: 89px;
   }
 
   .dropdown {
-    margin-top: 5px;
+    margin-top: 40px;
     position: relative;
     right: 22px;
   }
@@ -322,6 +324,10 @@ bottom: 89px;
   .dropdown-item, .dropdown-item-logout {
     font-size: 16px;
   }
+
+  .icon-settings {
+    left: 15px;
+  }
 }
 @media (min-width: 540px) and (max-width: 768px) {
   .h1-header {
@@ -341,6 +347,10 @@ bottom: 89px;
     margin-top: 20px;
     position: relative;
     right: 22px;
+  }
+
+  .icon-settings {
+    left: 5px;
   }
 
   .dropdown-menu.show {
@@ -371,6 +381,10 @@ bottom: 89px;
     margin-top: 20px;
     position: relative;
     right: 22px;
+  }
+
+  .icon-settings {
+    left: 5px;
   }
 
   .dropdown-menu.show {
