@@ -5,17 +5,19 @@
       <div class="col-sm-4">
         <h3>{{ data.nome }}</h3>
         <img :src="data.url" alt="Jogo de Copos Nadir 465ml" width="350" height="350" />
-        <button @click="adicionarPresenteCarrinho" v-if="Number(data.estoque) > 0" class="comprar">Confirmar</button>
+        <button @click="adicionarPresenteCarrinho" v-if="Number(data.estoque) > 0" class="comprar">Adicionar ao carrinho (1 quantidade)</button>
       </div>
-      <div class="col-sm-8">
-        <h3 class="h3-escolha">
-          Temos a opção de você comprar o presente em uma loja de sua preferência
-          e levar no dia, ou se achar melhor pode realizar um PIX no QRcode abaixo
-        </h3>
-      </div>
-      <div class="qrcode">
-        <p class="email">Email: raissacamillyalvesdedeus@gmail.com</p>
-          <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
+      <div class="container-escolha-qr">
+        <div class="col-sm-8">
+          <h3 class="h3-escolha">
+            Temos a opção de você comprar o presente em uma loja de sua preferência
+            e levar no dia, ou se achar melhor pode realizar um PIX no QRcode abaixo
+          </h3>
+        </div>
+        <div class="qrcode">
+          <p class="email">Email: raissacamillyalvesdedeus@gmail.com</p>
+            <img src="../assets/images/qrcode.jpg" alt="" width="150px" />
+        </div>
       </div>
     </div>
     <Footer />
@@ -43,16 +45,23 @@ onMounted(async () => {
 })
 
 async function adicionarPresenteCarrinho() {
-  const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, quantidadeCliente: data.value.quantidadeCliente, url: data.value.url, id_produto: data.value.id};
+  const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, estoque: data.value.estoque, quantidadeCliente: data.value.quantidadeCliente, confirmado: false, url: data.value.url, id_produto: data.value.id};
+
+  console.log(presente)
 }
 </script>
 
 <style scoped>
 .row {
+  justify-content: space-between!important;
   padding: 10px 20px 10px 20px;
   --bs-gutter-x: 0 !important;
   background-color: #d5b6a2;
   height: 100%;
+  flex-wrap: nowrap!important;
+}
+.row > * {
+  width: auto!important;
 }
 .email {
   margin-right: 10px;
@@ -80,9 +89,12 @@ async function adicionarPresenteCarrinho() {
   display: flex !important;
   justify-content: flex-end !important;
   align-items: flex-end !important;
-  margin-top: -150px;
 }
-
+.container-escolha-qr {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .col-sm-8 > .h3-escolha {
   display: flex !important;
   justify-content: center !important;
@@ -90,18 +102,5 @@ async function adicionarPresenteCarrinho() {
 }
 .h3-escolha {
   width: 450px;
-  display: flex;
-  justify-content: center !important;
-  align-items: center !important;
-}
-.col-sm-8 {
-  background-color: #d5b6a2;
-  height: 100%;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 100px;
 }
 </style>

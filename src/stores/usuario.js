@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useUsuarioStore = defineStore('user', {
-  state: () => ({
+  state: async () => ({
     trueUsuario: null,
     email: null,
     isAdmin: null

@@ -47,7 +47,7 @@
           </div>
 
           <div class="containerFinalizar">
-            <button v-if="Number(produto.estoque) > 0" @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto.nome, produto.quantidadeCliente, produto.estoque, produto.url, produto.id, produto.descricao)" class="buttonFinalizar">Escolher presente</button>
+            <button v-if="Number(produto.estoque) > 0" @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto)" class="buttonFinalizar">Escolher presente</button>
 
             <button v-else class="buttonSemEstoque">Escolher presente</button>
           </div>
@@ -85,37 +85,46 @@ onMounted(async () => {
     console.log("Nenhum documento encontrado");
   }
 });
+function incrementarQuantidade(produto) {
+  if ((produto.estoque - produto.quantidadeCliente) > 0) {
+    produto.quantidadeCliente += 1;
+  } else {
+    if (produto.quantidadeCliente === 1) {
+      alert("Desculpe-me, mas este produto só pode ser comprado 1 vez!");
+    } else {
+      alert(`Desculpe-me, mas este produto só pode ser comprado ${produto.quantidadeCliente} vezes`); 
+    }
+  }
+}
 function decrementarQuantidade(produto) {
   if (produto.quantidadeCliente > 1) {
     produto.quantidadeCliente -= 1;
   }
 }
-function incrementarQuantidade(produto) {
-  if ((produto.estoque - produto.quantidadeCliente) > 0) {
-    produto.quantidadeCliente += 1;
-  } else {
-    console.log("Este produto não tem estoque suficiente para adicionar mais um");
-  }
-}
 
-async function adicionarCarrinho(email, nomeProduto, quantidadeCliente, estoque, url, id, descricao) {
+async function adicionarCarrinho(email, produto) {
   if (email == undefined) {
-    console.log("Você não pode adicionar um produto pois não está logado");
+    alert("Você não pode adicionar um produto pois não está logado");
   } else {
-    if (Number(estoque) > 0) {
-      const addPresente = {email, nome: nomeProduto, descricao, estoque, quantidadeCliente, url, id_produto: id};
-      const atualizarEstoque = (Number(estoque) - quantidadeCliente).toString();
-      const atualizarProduto = {descricao, estoque: atualizarEstoque, nome: nomeProduto, url};
+    let adicionarCarrinho = confirm("Você tem certeza de que deseja adicionar este presente ao seu carrinho? Escolha a opção 'OK' (em azul) se você quiser adicionar ao carrinho, ou a opção 'Cancelar' (em cinza) caso não queira adicionar ao carrinho!");
+    if (adicionarCarrinho) {
+      const addPresente = {email, nome: produto.nome, descricao: produto.descricao, estoque: produto.estoque, quantidadeCliente: produto.quantidadeCliente, confirmado: false, url: produto.url, id_produto: produto.id};
+      const atualizarEstoque = (Number(produto.estoque) - produto.quantidadeCliente).toString();
+      const atualizarProduto = {descricao: produto.descricao, estoque: atualizarEstoque, nome: produto.nome, url: produto.url};
 
-      await addDoc(collection(db, 'carrinho'), addPresente).catch((error) => {
+      await addDoc(collection(db, 'carrinho'), addPresente).then(() => {
+        produto.estoque = atualizarEstoque;
+        alert("Presente adicionado ao carrinho com sucesso!")
+      }).catch((error) => {
         console.error("Erro ao adicionar um produto ao carrinho:", error);
+        alert("Erro ao adicionar o presente ao carrinho! Por favor, verifique sua conexão e tente novamente.");
       })
 
-      await updateDoc(doc(db, 'produtos', id), atualizarProduto).catch((error) => {
+      await updateDoc(doc(db, 'produtos', produto.id), atualizarProduto).catch((error) => {
         console.error("Erro ao atualizar o produto:", error);
       })
     } else {
-      console.log("Não é possível adicionar este produto, pois ele está sem estoque");
+      alert("Produto não adicionado ao carrinho!");
     }
   }
 }
