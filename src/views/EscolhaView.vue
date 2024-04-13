@@ -137,6 +137,10 @@ async function adicionarPresenteCarrinho() {
   .col-sm-4 {
     margin-bottom: 20px;
   }
+  .col-sm-4 > img {
+    width: 300px;
+    height: 300px;
+  }
   .img-produto {
     width: 300px;
     height: 300px;
