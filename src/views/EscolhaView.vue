@@ -65,7 +65,6 @@ onMounted(async () => {
   data.value = (await produto).dadosProduto;
   console.log(data.value);
 });
-})
 
 async function adicionarPresenteCarrinho() {
   const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, estoque: data.value.estoque, quantidadeCliente: data.value.quantidadeCliente, confirmado: false, url: data.value.url, id_produto: data.value.id};
