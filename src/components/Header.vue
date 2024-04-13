@@ -184,7 +184,7 @@ bottom: 89px;
 }
 @media (max-width: 320px) {
   .h1-header {
-    font-size: 300px;
+    font-size: 30px;
   }
   .h3-v, .h3-i, .h3-r {
     font-size: 20px;
@@ -279,7 +279,6 @@ bottom: 89px;
   }
 
   .dropdown {
-    margin-top: 40px;
     position: relative;
     right: 22px;
   }
