@@ -28,7 +28,7 @@
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import { ref, onMounted, nextTick } from "vue"
-import { collection, addDoc, updateDoc } from "firebase/firestore";
+import { doc, collection, addDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase"
 import { useProdutoStore } from "../stores/produtoEscolhido"
 import { useUsuarioStore } from "../stores/usuario"
@@ -40,14 +40,37 @@ const usuario = useUsuarioStore();
 
 onMounted(async () => {
   await nextTick();
-  data.value = (await produto).dadosProduto;
+  data.value = produto.dadosProduto;
   console.log(data.value);
 })
 
 async function adicionarPresenteCarrinho() {
-  const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, estoque: data.value.estoque, quantidadeCliente: data.value.quantidadeCliente, confirmado: false, url: data.value.url, id_produto: data.value.id};
+  if (usuario.email == undefined) {
+    alert("Você não pode adicionar um produto pois não está logado");
+  } else {
+    let adicionarCarrinho = confirm("Você tem certeza de que deseja adicionar este presente ao seu carrinho? Escolha a opção 'OK' (em azul) se você quiser adicionar ao carrinho, ou a opção 'Cancelar' (em cinza) caso não queira adicionar ao carrinho!");
 
-  console.log(presente)
+    if (adicionarCarrinho) {
+      const presente = {email: usuario.email, nome: data.value.nome, descricao: data.value.descricao, estoque: data.value.estoque, quantidadeCliente: data.value.quantidadeCliente, confirmado: false, url: data.value.url, id_produto: data.value.id};
+
+      const atualizarEstoque = (Number(data.value.estoque) - data.value.quantidadeCliente).toString()
+  
+      await addDoc(collection(db, 'carrinho'), presente).then(() => {
+        alert("Presente adicionado ao carrinho com sucesso!")
+      }).catch((error) => {
+        console.error("Erro ao adicionar um produto ao carrinho:", error);
+        alert("Erro ao adicionar o presente ao carrinho! Por favor, verifique sua conexão e tente novamente.");
+      })
+
+      await updateDoc(doc(db, 'produtos', data.value.id), {
+        estoque: atualizarEstoque
+      }).catch((error) => {
+        console.error("Erro ao atualizar o produto:", error);
+      })
+    } else {
+      alert("Produto não adicionado ao carrinho!");
+    }
+  }
 }
 </script>
 
