@@ -2,6 +2,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  --b-gutter-x: 0 !important;
 }
 .background {
   background-color: #D5B6A2;
