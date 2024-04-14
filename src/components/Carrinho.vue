@@ -120,6 +120,9 @@ onMounted(async () => {
     presenteResponsivo.value = true
     console.log(presenteResponsivo.value)
   }
+
+  console.log(usuario.email)
+
   // Crie a consulta após o componente ter sido montado
   let q = query(collection(db, "carrinho"), where("email", "==", usuario.email));
   let snapShoot = await getDocs(q);
