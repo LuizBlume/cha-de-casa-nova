@@ -184,7 +184,7 @@ bottom: 89px;
 }
 @media (max-width: 320px) {
   .h1-header {
-    font-size: 300px;
+    font-size: 30px;
   }
   .h3-v, .h3-i, .h3-r {
     font-size: 20px;
@@ -202,6 +202,7 @@ bottom: 89px;
 
   .dropdown, .btn {
     top: 15px;
+    margin-bottom: 18px;
     width: 173px;
     font-size: 14px;
     height: 25px;
@@ -211,9 +212,9 @@ bottom: 89px;
     margin-top: 15px;
   }
 }
-@media (max-width: 375px) {
+@media (min-width: 321px) and (max-width: 375px) {
   .h1-header {
-    font-size: 34px;
+    font-size: 28px;
   }
   .h3-v, .h3-i, .h3-r {
     font-size: 20px;
@@ -224,13 +225,9 @@ bottom: 89px;
   .subheader {
     height: 6vw;
   }
-
-  .col {
-    margin: 20px 0 5px 0;
-  }
-
   .dropdown, .btn {
     top: 15px;
+    margin-bottom: 22px;
     width: 200px;
     font-size: 14px;
     height: 25px;
@@ -272,7 +269,7 @@ bottom: 89px;
   }
 
   .dropdown, .btn {
-    top: 12px;
+    top: 8px;
     width: 200px;
     font-size: 14px;
     height: 30px;
@@ -282,7 +279,6 @@ bottom: 89px;
   }
 
   .dropdown {
-    margin-top: 40px;
     position: relative;
     right: 22px;
   }
@@ -311,7 +307,6 @@ bottom: 89px;
     height: 8vw;
   }
   .dropdown, .btn {
-    top: 15px;
     width: 173px;
     font-size: 14px;
     height: 25px;
