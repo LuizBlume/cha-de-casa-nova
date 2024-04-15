@@ -308,6 +308,7 @@ async function adicionarCarrinho(email, produto) {
   .row {
     flex-direction: column;
     padding: 5px;
+    margin-top: 20px;
   }
   .col {
     margin: 5px 0;
@@ -414,6 +415,7 @@ async function adicionarCarrinho(email, produto) {
     flex-wrap: wrap;
     justify-content: space-between;
     padding: 10px;
+    margin-top: 85px;
   }
   .col {
     flex-basis: calc(33.33% - 20px);

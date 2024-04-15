@@ -333,7 +333,7 @@ async function adicionarPresenteCarrinho() {
   }
   .col-sm-8 {
     display: flex;
-    width: 48vw;
+    width: 52vw;
   }
   .qrcode {
     margin-top: 0;
@@ -346,6 +346,7 @@ async function adicionarPresenteCarrinho() {
   }
   .h3-escolha {
     width: 100vw;
+    margin-top: 50px;
     margin-bottom: 20px;
   }
   .h3-escolha > h3 {
@@ -353,9 +354,6 @@ async function adicionarPresenteCarrinho() {
   }
   .email {
     font-size: 20px;
-  }
-  .container-escolha-qr {
-    width: 10vw !important;
   }
 }
 @media screen and (min-width: 1025px) and (max-width: 1440px) {
@@ -388,16 +386,13 @@ async function adicionarPresenteCarrinho() {
   }
   .h3-escolha {
     width: 100vw;
-    margin-bottom: 20px;
+    margin-top: 100px;
   }
   .h3-escolha > h3 {
     font-size: 20px !important;
   }
   .email {
     font-size: 20px;
-  }
-  .container-escolha-qr {
-    width: 10vw !important;
   }
 }
 @media screen and (min-width: 1441px) and (max-width: 1920px) {

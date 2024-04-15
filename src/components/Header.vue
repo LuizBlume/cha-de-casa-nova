@@ -205,7 +205,7 @@ bottom: 89px;
     justify-content: center;
     align-items: center;
     position: relative;
-    top: 20px;
+    top: 5px;
     right: 10px;
     width: 200px;
     font-size: 14px;
@@ -245,7 +245,7 @@ bottom: 89px;
     position: relative;
     width: 200px;
     height: 30px;
-    top: 40px;
+    top: 16px;
     right: 15px;
     margin-top: 5px;
     margin-bottom: 22px;
@@ -271,7 +271,7 @@ bottom: 89px;
     font-size: 20px;
   }
   header {
-    height: 14vw;
+    height: 19vw;
   }
   .subheader {
     height: 6vw;
@@ -288,7 +288,6 @@ bottom: 89px;
     position: relative;
     width: 200px;
     height: 30px;
-    top: 25px;
     right: 10px;
     font-size: 14px;
   }
