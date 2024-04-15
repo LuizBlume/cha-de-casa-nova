@@ -201,8 +201,7 @@ bottom: 89px;
   }
 
   .dropdown, .btn {
-    top: 15px;
-    margin-bottom: 18px;
+    top: 30px;
     width: 173px;
     font-size: 14px;
     height: 25px;
@@ -226,7 +225,7 @@ bottom: 89px;
     height: 6vw;
   }
   .dropdown, .btn {
-    top: 15px;
+    top: 40px;
     margin-bottom: 22px;
     width: 200px;
     font-size: 14px;
@@ -269,7 +268,7 @@ bottom: 89px;
   }
 
   .dropdown, .btn {
-    top: 8px;
+    top: 40px;
     width: 200px;
     font-size: 14px;
     height: 30px;
@@ -343,9 +342,9 @@ bottom: 89px;
   }
 
   .dropdown {
-    margin-top: 20px;
+    top: 60px;
     position: relative;
-    right: 22px;
+    right: 60px;
   }
 
   .icon-settings {
@@ -377,9 +376,13 @@ bottom: 89px;
   }
 
   .dropdown {
-    margin-top: 20px;
     position: relative;
-    right: 22px;
+    top: 60px;
+    right: 90px;
+  }
+
+  .btn {
+    width: 200px;
   }
 
   .icon-settings {
@@ -461,7 +464,8 @@ bottom: 89px;
     align-items: center;
     margin-top: 20px;
     position: relative;
-    right: 10px;
+    top: 40px;
+    right: 50px;
   }
 
   .dropdown-menu.show {
