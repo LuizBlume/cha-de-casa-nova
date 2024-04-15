@@ -202,13 +202,25 @@ bottom: 89px;
 
   .dropdown, .btn {
     top: 30px;
-    width: 173px;
+    width: 200px;
     font-size: 14px;
     height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 15px;
+  }
+
+  .dropdown-menu.show {
+    width: 175px;
+  }
+
+  .email {
+    font-size: 0.7rem;
+  }
+
+  .dropdown-item {
+    font-size: 0.9rem;
   }
 }
 @media (min-width: 321px) and (max-width: 375px) {
@@ -347,6 +359,14 @@ bottom: 89px;
     right: 60px;
   }
 
+  .btn {
+    width: 200px!important;
+  }
+
+  .btn {
+    width: 200px!important;
+  }
+
   .icon-settings {
     left: 5px;
   }
@@ -390,7 +410,7 @@ bottom: 89px;
   }
 
   .dropdown-menu.show {
-    width: 192px;
+    width: 200px!important;
   }
   .dropdown-item, .dropdown-item-logout {
     font-size: 1rem;
