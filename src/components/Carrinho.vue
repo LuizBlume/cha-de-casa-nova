@@ -120,9 +120,6 @@ onMounted(async () => {
     presenteResponsivo.value = true
     console.log(presenteResponsivo.value)
   }
-
-  console.log(usuario.email)
-
   // Crie a consulta após o componente ter sido montado
   let q = query(collection(db, "carrinho"), where("email", "==", usuario.email));
   let snapShoot = await getDocs(q);
@@ -363,5 +360,12 @@ async function removerPresente(id_presente, id_produto) {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .container-presentes {
+    gap: 60px;
+    margin-bottom: 40px;
+  }
 }
 </style>
