@@ -47,12 +47,6 @@
               -
             </button>
           </div>
-
-          <div class="containerFinalizar">
-            <button v-if="Number(produto.estoque) > 0" @click="adicionarCarrinho(usuarioStore.trueUsuario.email, produto)" class="buttonFinalizar">Escolher presente</button>
-
-            <button v-else class="buttonSemEstoque">Escolher presente</button>
-          </div>
         </div>
       </div>
     </div>
