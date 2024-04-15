@@ -23,7 +23,7 @@ onMounted(async () => {
 
   console.log(alturaTotal.value.offsetHeight)
   if (alturaTotal.value.offsetHeight <= document.documentElement.offsetHeight) {
-    alturaTotal.value.style.height = 'auto';
+    alturaTotal.value.style.height = '100vh';
   } else {
     alturaTotal.value.style.height = 'auto';
 }
@@ -163,7 +163,7 @@ console.log('Quantidade de produtos:', quantidadeProdutos);
     "header"
     "main"
     "footer";
-    grid-template-rows: 0.3fr 2fr 0.4fr;
+    grid-template-rows: .5fr 2fr .4fr;
     background-color: #D5B6A2;
   }
 }
