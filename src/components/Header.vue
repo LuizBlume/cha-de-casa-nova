@@ -201,22 +201,24 @@ bottom: 89px;
   }
 
   .dropdown, .btn {
-    top: 30px;
-    width: 200px;
-    font-size: 14px;
-    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    top: 20px;
+    right: 10px;
+    width: 200px;
+    font-size: 14px;
+    height: 30px;
     margin-top: 15px;
   }
 
   .dropdown-menu.show {
-    width: 175px;
+    width: 190px;
   }
 
   .email {
-    font-size: 0.7rem;
+    font-size: 0.75rem!important;
   }
 
   .dropdown-item {
@@ -237,17 +239,17 @@ bottom: 89px;
     height: 6vw;
   }
   .dropdown, .btn {
-    top: 40px;
-    margin-bottom: 22px;
-    width: 200px;
-    font-size: 14px;
-    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    right: 22px;
+    width: 200px;
+    height: 30px;
+    top: 40px;
+    right: 15px;
     margin-top: 5px;
+    margin-bottom: 22px;
+    font-size: 14px;
   }
   .dropdown-menu.show {
     position: absolute!important;
@@ -280,13 +282,15 @@ bottom: 89px;
   }
 
   .dropdown, .btn {
-    top: 40px;
-    width: 200px;
-    font-size: 14px;
-    height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    width: 200px;
+    height: 30px;
+    top: 25px;
+    right: 10px;
+    font-size: 14px;
   }
 
   .dropdown {
@@ -356,7 +360,7 @@ bottom: 89px;
   .dropdown {
     top: 60px;
     position: relative;
-    right: 60px;
+    right: 30px;
   }
 
   .btn {
@@ -398,7 +402,7 @@ bottom: 89px;
   .dropdown {
     position: relative;
     top: 60px;
-    right: 90px;
+    right: 40px;
   }
 
   .btn {
@@ -485,7 +489,7 @@ bottom: 89px;
     margin-top: 20px;
     position: relative;
     top: 40px;
-    right: 50px;
+    right: 20px;
   }
 
   .dropdown-menu.show {
