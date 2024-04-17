@@ -154,32 +154,6 @@ async function adicionarCarrinho(email, produto) {
   border-radius: 5px;
   width: 35%;
 }
-
-.containerFinalizar {
-  width: 40%;
-}
-
-.buttonFinalizar {
-  width: 100%;
-  padding: 10px 20px 10px 20px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  background: #1a1a1a;
-  color: orangered;
-}
-.buttonSemEstoque {
-  width: 100%;
-  padding: 10px 20px 10px 20px;
-  border: none;
-  outline: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  background: #1a1a1a;
-  color: #6b6664;
-  cursor: default;
-}
 .quantidade-cliente {
   color: #fdfdfd;
   font-size: 14px;
@@ -322,10 +296,6 @@ async function adicionarCarrinho(email, produto) {
     top: 5px;
     left: 5px;
   }
-  .buttonFinalizar {
-    font-size: 0.8rem;
-    padding: 8px 16px;
-  }
   .quantidade-cliente {
     font-size: 12px;
     padding: 5px;
@@ -356,10 +326,6 @@ async function adicionarCarrinho(email, produto) {
   .status {
     top: 5px;
     left: 5px;
-  }
-  .buttonFinalizar {
-    font-size: 0.8rem;
-    padding: 8px 16px;
   }
   .quantidade-cliente {
     font-size: 12px;
@@ -392,10 +358,6 @@ async function adicionarCarrinho(email, produto) {
     top: 5px;
     left: 5px;
   }
-  .buttonFinalizar {
-    font-size: 0.8rem;
-    padding: 8px 16px;
-  }
   .quantidade-cliente {
     font-size: 12px;
     padding: 5px;
@@ -426,14 +388,9 @@ async function adicionarCarrinho(email, produto) {
     flex-wrap: wrap;
     padding: 5px;
   }
-  .containerButton,
-  .containerFinalizar {
+  .containerButton {
     width: 45%; /* ou ajuste conforme desejado */
     margin-top: 5px; /* ou ajuste conforme desejado */
-  }
-  .buttonFinalizar {
-    font-size: 0.8rem;
-    padding: 8px 16px;
   }
   .containerButton {
     width: 50%;
