@@ -61,15 +61,12 @@ async function logar() {
     const auth = getAuth();
 
     await signInWithEmailAndPassword(auth, email.value, senha.value).then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
         reloadStore.isReload = true;
         router.push({ path: '/' });
     })
   } catch(error) {
     showError.value = true
-    console.log(showError)
-    console.error("Erro ao logar o usuário:", error);
+    // console.error("Erro ao logar o usuário:", error);
   }
 }
 </script>

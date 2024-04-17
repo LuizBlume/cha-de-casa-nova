@@ -23,7 +23,6 @@ onMounted(async () => {
   const auth = getAuth();
 
   setPersistence(auth, browserLocalPersistence).then(() => {
-    console.log("Persistência definida como local!")
   })
   .catch((error) => {
     console.error("Erro ao definir a persistência:", error)
@@ -33,10 +32,8 @@ onMounted(async () => {
     if (user) {
         storeUsuario.trueUsuario = user;
         storeUsuario.email = storeUsuario.trueUsuario.email;
-        console.log(storeUsuario.trueUsuario);
     } else {
         storeUsuario.trueUsuario = false
-        console.log("Nenhum usuário logado", user);
     }
   })
 
@@ -46,19 +43,15 @@ onMounted(async () => {
     getAdmins.forEach((admin) => {
       if (admin.data().email_usuario === storeUsuario.trueUsuario.email && storeUsuario.trueUsuario !== null) {
         storeUsuario.isAdmin = true;
-        console.log("Você é um admin");
       } else {
-        console.log("Você não é um admin");
       }
     })
   }
 
   if (alturaApp.value.offsetHeight <= document.documentElement.offsetHeight) {
     alturaApp.value.style.height = '100vh';
-    console.log(alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
   } else {
     alturaApp.value.style.height = '100%';
-    console.log(alturaApp.value.style.height, alturaApp.value.offsetHeight, document.documentElement.offsetHeight);
   }
 })
 </script>

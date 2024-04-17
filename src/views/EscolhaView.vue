@@ -54,7 +54,6 @@ const usuario = useUsuarioStore();
 onMounted(async () => {
   await nextTick();
   data.value = produto.dadosProduto;
-  console.log(data.value);
 });
 
 async function adicionarPresenteCarrinho() {

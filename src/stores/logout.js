@@ -9,7 +9,6 @@ export const useLogoutStore = defineStore('logout', {
   actions: {
     async handleLogout() {
         if (this.logoutUsuario) {
-            console.log("Realizando o logout...");
 
             await logout();
 

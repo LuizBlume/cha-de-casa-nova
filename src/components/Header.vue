@@ -54,7 +54,6 @@ const deslogarUsuario = useLogoutStore();
 
 onMounted(async () => {
 await nextTick();
-console.log(verificacaoUsuario.trueUsuario)
 })
 
 

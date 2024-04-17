@@ -75,16 +75,15 @@ async function cadastrar() {
 
     await createUserWithEmailAndPassword(auth, email.value, senha.value).then(
       (res) => {
-        console.log(res);
         router.push({ path: "/login" });
       }
     );
   } catch (error) {
     if (error.code === "auth/email-already-in-use") {
       emailJaExiste.value = true;
-      console.log("Este email já existe!");
+      alert("Este email já existe!");
     } else {
-      console.error("Erro ao cadastrar usuário:", error);
+      // console.error("Erro ao cadastrar usuário:", error);
     }
   }
 }

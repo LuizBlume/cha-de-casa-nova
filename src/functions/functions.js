@@ -30,11 +30,9 @@ export async function logout() {
     const auth = getAuth();
     try {
         await signOut(auth);
-        console.log("Usuário deslogado com sucesso!");
         logoutStore.logoutUsuario = false;
         changePiniaUser();
     } catch (error) {
-        console.error("Erro ao tentar deslogar o usuário:", error);
     }
 }
 
@@ -47,13 +45,10 @@ export async function changePiniaUser() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 usuarioStore.usuario = user;
-                console.log(usuarioStore.usuario);
             } else {
                 usuarioStore.usuario = false
-                console.log("Nenhum usuário logado", user);
             }
         })
-        console.log("Função concluída com sucesso");
     } catch (error) {
         console.error("Erro ao tentar achar um usuário", error);
     }

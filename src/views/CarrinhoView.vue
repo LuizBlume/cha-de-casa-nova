@@ -21,7 +21,6 @@ const { quantidadeProdutos } = storeToRefs(quantidadeProdutosStore);
 onMounted(async () => {
   await nextTick()
 
-  console.log(alturaTotal.value.offsetHeight)
   if (alturaTotal.value.offsetHeight <= document.documentElement.offsetHeight) {
     alturaTotal.value.style.height = '100vh';
   } else {
@@ -30,7 +29,6 @@ onMounted(async () => {
 })
 
 watch(quantidadeProdutos, () => {
-console.log('Quantidade de produtos:', quantidadeProdutos);
 })
 </script>
 

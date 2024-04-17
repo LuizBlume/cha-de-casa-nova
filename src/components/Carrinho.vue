@@ -118,7 +118,6 @@ onMounted(async () => {
 
   if (document.documentElement.offsetWidth <= 1023) {
     presenteResponsivo.value = true
-    console.log(presenteResponsivo.value)
   }
   // Crie a consulta após o componente ter sido montado
   let q = query(collection(db, "carrinho"), where("email", "==", usuario.email));
@@ -131,10 +130,7 @@ onMounted(async () => {
         id: presente.id,
       });
     });
-
-    console.log(produtosEscolhidos.value);
   } else {
-    console.log("Nenhum produto escolhido", typeof produtosEscolhidos.value);
   }
   quantidadeProdutos.quantidadeProdutos = produtosEscolhidos.value.length;
 });
@@ -143,7 +139,6 @@ function alterarQuantidade(presente, aumentar) {
   if (aumentar) {
     if (Number(presente.estoque) - presente.quantidadeCliente > 0) {
       presente.quantidadeCliente += 1
-      console.log(Number(presente.estoque), presente.quantidadeCliente);
     } else {
       if (presente.quantidadeCliente > 1) {
         alert(`Desculpe, mas não é possível aumentar a quantidade que você vai levar deste produto, pois é preferível a compra de no máximo ${presente.quantidadeCliente} unidades deste produto!`);
@@ -174,7 +169,6 @@ async function confirmarPresente(presente) {
       presente.confirmado = true;
       alert("Presente confirmado com sucesso!");
     }).catch((error) => {
-      console.error("Erro ao confirmar o presente:", error);
       alert("Erro ao confirmar o presente!");
     })
   } else {
@@ -187,8 +181,7 @@ async function removerPresente(id_presente, id_produto) {
   let estoque_produto = "";
   produtosEscolhidos.value.forEach((produto) => {
     if (produto.id === id_presente) {
-      estoque_produto = produto.quantidadeCliente.toString();
-      console.log(estoque_produto, id_produto, id_presente);
+      estoque_produto = produto.estoque
     }
   });
 
@@ -197,7 +190,6 @@ async function removerPresente(id_presente, id_produto) {
   await updateDoc(doc(db, "produtos", id_produto), {
     estoque: estoque_produto,
   }).then(() => {
-    console.log("Estoque atualizado");
     location.reload();
   });
 }

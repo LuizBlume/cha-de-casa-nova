@@ -22,7 +22,6 @@ onMounted(async () => {
     if (reload.isReload === true) {
       reload.isReload = false;
       location.reload();
-      console.log(reload.isReload)
     }
   }
 

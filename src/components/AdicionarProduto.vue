@@ -36,9 +36,9 @@
 </template>
 
 <script setup>
-import { ref as vueRef, onMounted } from "vue"
+import { ref as vueRef } from "vue"
 import { db } from "../firebase"
-import { doc, collection, addDoc, updateDoc, deleteDoc } from "firebase/firestore"
+import { collection, addDoc } from "firebase/firestore"
 import { ref as firebaseRef, uploadBytes, listAll, getDownloadURL } from "firebase/storage"
 import { firebaseApp, storage } from "../firebase"
 
@@ -57,7 +57,6 @@ const listImages = firebaseRef(storage, 'produtos/')
 
 function handleImage(event) {
     upload.value = event.target.files[0]
-    console.log(upload.value)
 }
 
 async function uploadImages() {
@@ -70,13 +69,10 @@ async function uploadImages() {
 
           try {
               await uploadBytes(storageRef, upload.value, metadata)
-              console.log("Imagem enviada", upload.value.name);
               getImages();
           } catch (error) {
               console.error("Erro ao enviar a imagem:", error);
           }
-      } else {
-          console.log("No file selected");
       }
 }
 
@@ -92,7 +88,6 @@ async function getImages() {
 
         formData.value.url = downloadURL;
 
-        console.log(formData.value.url);
         addOuAtualizarProduto();
       }
     }
@@ -103,7 +98,6 @@ async function getImages() {
 
 async function addOuAtualizarProduto() {
   await addDoc(collection(db, 'produtos'), formData.value).then((res) => {
-    console.log("Post concluído com sucesso!");
     location.reload()
   }).catch((error) => {
     console.error("Erro ao tentar realizar o post:", error);
