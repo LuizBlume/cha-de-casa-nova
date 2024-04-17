@@ -14,8 +14,9 @@
           @click="adicionarPresenteCarrinho"
           v-if="Number(data.estoque) > 0"
           class="comprar"
-        >
-          Adicionar ao carrinho (1 quantidade)
+          >
+
+          Adicionar ao carrinho ({{ data.quantidadeCliente > 1 ? `${data.quantidadeCliente} quantidades` : '1 quantidade' }})
         </button>
       </div>
       <div class="container-escolha-qr">
